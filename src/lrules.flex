@@ -54,7 +54,6 @@ whitespace = [ \t\f]
 
 {whitespace}    { /* just skip */ }
 
-{flag}		{ return symbol(sym.FLAG, new String(yytext())); }
 {port}		{ return symbol(sym.PORT, new Integer(yytext())); }
 {ip}		{ return symbol(sym.IP, new String(yytext())); }
 {string}	{ return symbol(sym.STRING, new String(yytext())); }

@@ -1,24 +1,24 @@
-CLASSES = parser.java lexer.java
-
 JFLEX = ../lib/jflex/bin/jflex
 CPATH = ../lib:.
+
+BLD = ./parser
+SRC = .
 
 JAVAOPTS = -classpath $(CPATH)
 JAVA = java
 
-BLD = ./parser
-SRC = .
+CLASSES = $(BLD)/parser.java $(BLD)/lexer.java
 
 .PHONY: all clean
 
 all: $(CLASSES)
 
 clean:
-	rm -fv ./parser/*.java
+	rm -fv $(CLASSES)
 
-parser.java: yrules.cup
+$(BLD)/parser.java: yrules.cup
 	$(JAVA) $(JAVAOPTS) java_cup.Main yrules.cup
-	mv parser.java sym.java ./parser
+	mv parser.java sym.java $(BLD)
 
-lexer.java: lrules.flex
+$(BLD)/lexer.java: lrules.flex
 	$(JFLEX) -d $(BLD) lrules.flex
