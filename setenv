@@ -1,4 +1,0 @@
-#!/bin/sh
-
-export PATH=$PATH:`pwd`/lib/jflex
-export CLASSPATH=$CLASSPATH:`pwd`/lib/:.

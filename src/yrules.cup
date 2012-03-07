@@ -40,9 +40,9 @@ protocol_rule ::= SET_TYPE PROTOCOL NLINE
 
 sub_rules ::= sub_rule | sub_rule sub_rules;
 
-sub_rules ::= direction REGEXP NLINE
-              |
-              direction REGEXP WITH SET_FLAGS flags;
+sub_rule ::= direction REGEXP NLINE
+             |
+             direction REGEXP WITH SET_FLAGS flags NLINE;
 
 flags ::= FLAG | FLAG flags;
 
