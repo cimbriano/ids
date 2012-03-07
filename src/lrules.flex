@@ -5,7 +5,6 @@ import java_cup.runtime.*;
 %class lexer
 %line
 %column
-
 %cup
 
 %{
@@ -19,12 +18,20 @@ import java_cup.runtime.*;
 %}
 
 string = [A-Za-z0-9 ]+
-octet = [0-255]
+
+octet = (2[0-5][0-5]) | ([0-1][0-9][0-9]) | ([0-9][0-9]) | ([0-9])
 ip = {octet}\.{octet}\.{octet}\.{octet}
-port = [0-65535]
+
+port = (6[0-5][0-5][0-3][0-5]) | ([0-5][0-9][0-9][0-9][0-9]) | ([0-9][0-9][0-9][0-9]) | 
+				  ([0-9][0-9][0-9]) | ([0-9][0-9])|([0-9])
+
 flag = [S|A|F|R|P|U]
 flags = {flag}*
-regexp = .+
+
+regexp = \".*\"
+
+newline = \r|\n|\r\n
+whitespace = [ \t\f]
 
 %%
 
@@ -44,10 +51,17 @@ regexp = .+
 "tcp_stream" 	{ return symbol(sym.TCP_STREAM); }
 "host="		{ return symbol(sym.SET_HOST); }
 "name="		{ return symbol(sym.SET_NAME); }
-"\n"		{ return symbol(sym.NLINE); } 
+
+{whitespace}    { /* just skip */ }
 
 {port}		{ return symbol(sym.PORT, new Integer(yytext())); }
 {ip}		{ return symbol(sym.IP, new String(yytext())); }
 {string}	{ return symbol(sym.STRING, new String(yytext())); }
 {flag}		{ return symbol(sym.FLAG, new String(yytext())); }
-{regexp}	{ return symbol(sym.REGEXP, new String(yytext())); }
+{regexp}        { return symbol(sym.REGEXP, new String(yytext())); }
+
+{newline}       { return symbol(sym.NLINE); } 
+
+[^]             { throw new Error("Illegal character <" + yytext() + ">"); }
+
+

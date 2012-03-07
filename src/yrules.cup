@@ -1,5 +1,36 @@
 import java_cup.runtime.*;
 
+parser code {:
+
+    public void report_error(String msg, Object i) {
+	StringBuffer m = new StringBuffer("Error");
+
+	if (i instanceof java_cup.runtime.Symbol) {
+	    java_cup.runtime.Symbol s = ((java_cup.runtime.Symbol) i);
+
+	    if (s.left >= 0) {
+		m.append(" in line " + (s.left+1));
+
+		if (s.right >= 0)
+		    m.append(", column " + (s.right+1));
+
+		m.append(", symbol " + s.toString());
+		m.append(", value " + s.value.toString());
+	    }
+	}
+
+	m.append(" : " + msg);
+
+	System.err.println(m);
+    }
+
+    public void report_fatal_error(String msg, Object i) {
+	report_error(msg, i);
+	System.exit(1);
+    }
+
+ :};
+
 terminal STRING, IP, REGEXP, FLAG;
 terminal Integer PORT;
 
@@ -15,9 +46,9 @@ non terminal Object sub_rules;
 
 file ::= host rule_list;
 
-rule_list ::= rule | rule rule_list;
+rule_list ::= rule | rule_list rule;
 
-host ::= SET_HOST STRING NLINE NLINE;
+host ::= SET_HOST IP NLINE NLINE;
 
 rule ::= SET_NAME STRING NLINE
          tcp_stream_rule NLINE
@@ -28,8 +59,8 @@ rule ::= SET_NAME STRING NLINE
 tcp_stream_rule ::= SET_TYPE TCP_STREAM NLINE
                     SET_SRC port NLINE
                     SET_DST port NLINE
-                    SET_IP ip NLINE
-                    direction REGEXP NLINE;
+                    SET_IP ip NLINE 
+                    direction REGEXP  {: System.out.println("Blah"); :} NLINE;
 
 protocol_rule ::= SET_TYPE PROTOCOL NLINE
                   SET_PROTO proto NLINE
