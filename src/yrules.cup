@@ -33,19 +33,19 @@ parser code {:
 
 /* */
 
-terminal STRING, IP, REGEXP, FLAG;
+terminal STRING, IP, REGEXP;
 terminal Integer PORT;
 
 terminal ANY, SET_IP, SET_TYPE, RECV, SEND, SET_PROTO, TCP, UDP, WITH_FLAGS;
 terminal SET_HOST, NLINE, SET_NAME, TCP_STREAM, PROTOCOL, SET_SRC, SET_DST;
 
 non terminal Object file, rule_list, host, rule, tcp_stream_rule, proto;
-non terminal Object protocol_rule, sub_rule, flags, port, ip, direction;
+non terminal Object protocol_rule, sub_rule, port, ip, direction;
 non terminal Object sub_rules;
 
 /* */
 
-file ::= host rule;
+file ::= host rule_list;
 
 rule_list ::= rule | rule_list rule;
 
@@ -77,8 +77,6 @@ sub_rule ::= direction REGEXP NLINE
              direction REGEXP WITH_FLAGS STRING NLINE
              |
              direction REGEXP WITH_FLAGS NLINE;
-
-flags ::= FLAG | FLAG flags;
 
 proto ::= TCP | UDP;
 

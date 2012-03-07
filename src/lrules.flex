@@ -30,7 +30,6 @@ string = [A-Za-z0-9 ]+
 regexp = \".*\"
 
 flag = [S|A|F|R|P|U]
-flags = {flag}*
 
 newline = \r|\n|\r\n
 whitespace = [ \t\f]
