@@ -1,5 +1,6 @@
 import java_cup.runtime.*;
 
+
 parser code {:
 
     public void report_error(String msg, Object i) {
@@ -39,9 +40,26 @@ terminal Integer PORT;
 terminal ANY, SET_IP, SET_TYPE, RECV, SEND, SET_PROTO, TCP, UDP, WITH_FLAGS;
 terminal SET_HOST, NLINE, SET_NAME, TCP_STREAM, PROTOCOL, SET_SRC, SET_DST;
 
+/*
 non terminal Object file, rule_list, host, rule, tcp_stream_rule, proto;
 non terminal Object protocol_rule, sub_rule, port, ip, direction;
 non terminal Object sub_rules;
+*/
+
+non terminal ThreatDefinition file;
+non terminal AbstractRuleList rule_list;
+non terminal AbstractRule rule;
+
+non terminal TcpRule tcp_stream_rule;
+
+non terminal ProtocolRule protocol_rule;
+non terminal ProtocolSubrule sub_rule;
+non terminal SortedProtocolSubruleList sub_rules;
+
+non terminal String ip, direction, proto, host;
+non terminal Integer port;
+
+
 
 /* */
 

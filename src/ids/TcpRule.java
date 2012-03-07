@@ -1,6 +1,6 @@
 package ids;
 
-public class TcpRule extends Rule {
+public class TcpRule implements AbstractRule {
 	int srcPort;
 	int dstPort;
 	int ip;

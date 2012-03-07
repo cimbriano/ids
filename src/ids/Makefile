@@ -6,7 +6,7 @@ SRC = .
 JAVAOPTS = -classpath $(CPATH) -d $(BLD)
 JAVAC = javac
 
-CLASSES = $(BLD)/parser.class $(BLD)/lexer.class
+CLASSES = $(BLD)/AbstractRule.class $(BLD)/AbstractRuleList.class $(BLD)/ProtocolRule.class $(BLD)/ProtocolSubrule.class $(BLD)/SortedProtocolSubrulList.class $(BLD)/TcpRule.class $(BLD)/ThreatDefinition.class
 
 .PHONY: all clean
 

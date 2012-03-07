@@ -2,7 +2,7 @@ package ids;
 
 import java.util.List;
 
-public class ProtocolRule extends Rule {
+public class ProtocolRule implements AbstractRule {
 	boolean isTcp;
 	int srcPort;
 	int dstPort;
