@@ -2,5 +2,5 @@
 
 for f in `ls ../../etc/rules`
 do
-    java -classpath ../../lib:../../build:. ParsingRules "../../etc/rules/$f"
+    java -classpath ../../lib:../../bin:. ParsingRules "../../etc/rules/$f"
 done
