@@ -17,26 +17,27 @@ import java_cup.runtime.*;
     }
 %}
 
-string = [A-Za-z0-9 ]+
+port = (6[0-5][0-5][0-3][0-5]) | ([0-5][0-9][0-9][0-9][0-9]) |
+       ([0-9][0-9][0-9][0-9])  | ([0-9][0-9][0-9]) |
+       ([0-9][0-9]) | ([0-9])
 
 octet = (2[0-5][0-5]) | ([0-1][0-9][0-9]) | ([0-9][0-9]) | ([0-9])
+
 ip = {octet}\.{octet}\.{octet}\.{octet}
 
-port = (6[0-5][0-5][0-3][0-5]) | ([0-5][0-9][0-9][0-9][0-9]) | ([0-9][0-9][0-9][0-9]) | 
-				  ([0-9][0-9][0-9]) | ([0-9][0-9])|([0-9])
+string = [A-Za-z0-9 ]+
+
+regexp = \".*\"
 
 flag = [S|A|F|R|P|U]
 flags = {flag}*
-
-regexp = \".*\"
 
 newline = \r|\n|\r\n
 whitespace = [ \t\f]
 
 %%
 
-"flags="        { return symbol(sym.SET_FLAGS); }
-"with"          { return symbol(sym.WITH); }
+" with flags="  { return symbol(sym.WITH_FLAGS); }
 "udp"		{ return symbol(sym.UDP); }
 "tcp"		{ return symbol(sym.TCP); }
 "proto="	{ return symbol(sym.SET_PROTO); }
@@ -54,12 +55,11 @@ whitespace = [ \t\f]
 
 {whitespace}    { /* just skip */ }
 
+{flag}		{ return symbol(sym.FLAG, new String(yytext())); }
 {port}		{ return symbol(sym.PORT, new Integer(yytext())); }
 {ip}		{ return symbol(sym.IP, new String(yytext())); }
 {string}	{ return symbol(sym.STRING, new String(yytext())); }
-{flag}		{ return symbol(sym.FLAG, new String(yytext())); }
 {regexp}        { return symbol(sym.REGEXP, new String(yytext())); }
-
 {newline}       { return symbol(sym.NLINE); } 
 
 [^]             { throw new Error("Illegal character <" + yytext() + ">"); }
