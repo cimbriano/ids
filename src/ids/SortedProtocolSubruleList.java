@@ -1,5 +1,7 @@
 package ids;
 
-public class SortedProtocolSubruleList extends SortedList<ProtocolSubrule> {
+import java.util.*;
+
+public class SortedProtocolSubruleList extends ArrayList<ProtocolSubrule> {
 
 }

@@ -1,19 +1,20 @@
-CLASSES = ParsingRules.class
-
-BLD = ../../build
-SRC = ../src
-CPATH = $(BLD):../../lib
+CPATH = ../../bin:../../lib
+BLD = .
+SRC = .
 
 JAVAOPTS = -classpath $(CPATH)
 JAVAC = javac
+
 JAVA = java
+
+CLASSES = ParsingRules.class
 
 .PHONY: all clean
 
 all: $(CLASSES)
 
 clean:
-	rm -fv *.class
+	rm -fv $(CLASSES)
 
 %.class: %.java
 	$(JAVAC) $(JAVAOPTS) $<

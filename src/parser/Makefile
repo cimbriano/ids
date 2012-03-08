@@ -1,5 +1,4 @@
 CPATH = ../../lib:../../bin:.
-
 BLD = ../../bin
 SRC = .
 

@@ -1,6 +1,5 @@
 JFLEX = ../lib/jflex/bin/jflex
 CPATH = ../lib:.
-
 BLD = ./parser
 SRC = .
 
@@ -12,9 +11,13 @@ CLASSES = $(BLD)/parser.java $(BLD)/lexer.java
 .PHONY: all clean
 
 all: $(CLASSES)
+	cd ids; make
+	cd parser; make
 
 clean:
 	rm -fv $(CLASSES)
+	cd ids; make clean
+	cd parser; make clean
 
 $(BLD)/parser.java: yrules.cup
 	$(JAVA) $(JAVAOPTS) java_cup.Main yrules.cup
