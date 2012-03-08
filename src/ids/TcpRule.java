@@ -1,6 +1,6 @@
 package ids;
 
-public class TcpRule extends AbstractRule
+public class TcpRule implements AbstractRule
 {
     final Integer srcPort;
     final Integer dstPort;
@@ -16,17 +16,11 @@ public class TcpRule extends AbstractRule
 	regexp = new String(r);
     }
 
-    public void setName(String n) {
-	name = new String(n);
-    }
-
     public void printRule() {
-	System.out.print("name="+name+"\n");
 	System.out.print("type=tcp_stream\n");
 	System.out.print("src_port="+srcPort+"\n");
 	System.out.print("dst_port="+dstPort+"\n");
 	System.out.print("ip="+ip+"\n");
 	System.out.print((isSend ? "send=" : "recv=")+regexp+"\n");
     }
-
 }

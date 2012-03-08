@@ -15,5 +15,4 @@ public class ProtocolSubrule
 	for (int x = 0; x < f.length(); x++)
 	    flags.add(new Character(f.charAt(x)));
     }
-
 }

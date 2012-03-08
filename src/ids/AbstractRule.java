@@ -1,10 +1,9 @@
 package ids;
 
-abstract public class AbstractRule
+interface AbstractRule
 {
-    String name;
+   public void printRule();
 
-    abstract public void setName(String n);
-    abstract public void printRule();
+    /* scan packet, etc */
 
 }

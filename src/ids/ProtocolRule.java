@@ -2,7 +2,7 @@ package ids;
 
 import java.util.List;
 
-public class ProtocolRule extends AbstractRule
+public class ProtocolRule implements AbstractRule
 {
     final ProtocolSubruleList subrules;
     final boolean isTcp;
@@ -20,12 +20,7 @@ public class ProtocolRule extends AbstractRule
 	subrules = rules;
     }
 
-    public void setName(String n) {
-	name = new String(n);
-    }
-
     public void printRule() {
-	System.out.print("name="+name+"\n");
 	System.out.print("type=protocol\n");
 	System.out.print("proto="+(isTcp ? "tcp" : "udp")+"\n");
 	System.out.print("src_port="+srcPort+"\n");
@@ -33,19 +28,16 @@ public class ProtocolRule extends AbstractRule
 	System.out.print("ip="+ip+"\n");
 
 	for (ProtocolSubrule r : subrules) {
-	    System.out.print(r.isSend ? "send=" : "recv=");
-	    System.out.print(r.regexp);
+	    System.out.print((r.isSend ? "send=" : "recv=")+r.regexp);
 
 	    if (!r.flags.isEmpty()) {
 		System.out.print(" with flags=");
 
 		for (Character c : r.flags)
 		    System.out.print(c);
-
-		System.out.print("\n");
-	    } else
-		System.out.print("\n");
+	    }
+	    
+	    System.out.print("\n");
 	}
     }
-
 }
