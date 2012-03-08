@@ -2,8 +2,8 @@ package ids;
 
 import java.util.*;
 
-public class ProtocolSubrule {
-
+public class ProtocolSubrule
+{
     final ArrayList<Character> flags = new ArrayList<Character>();
     final boolean isSend;
     final String regexp;

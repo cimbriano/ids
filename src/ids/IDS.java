@@ -1,6 +1,7 @@
 package ids;
 
-public class IDS {
+public class IDS
+{
 
 	/**
 	 * @param args

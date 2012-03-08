@@ -3,9 +3,13 @@ import java_cup.runtime.*;
 %%
 
 %class lexer
+
 %line
 %column
+
 %cup
+
+ /* Helper functions */
 
 %{
     private Symbol symbol(int type) {
@@ -16,6 +20,8 @@ import java_cup.runtime.*;
 	return new Symbol(type, yyline, yycolumn, value);
     }
 %}
+
+/* Grammar terminals */
 
 port = (6[0-5][0-5][0-3][0-5]) | ([0-5][0-9][0-9][0-9][0-9]) |
        ([0-9][0-9][0-9][0-9])  | ([0-9][0-9][0-9]) |
@@ -32,6 +38,7 @@ regexp = \".*\"
 flag = [S|A|F|R|P|U]
 
 newline = \r|\n|\r\n
+
 whitespace = [ \t\f]
 
 %%

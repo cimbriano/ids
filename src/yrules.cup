@@ -1,6 +1,8 @@
 import java_cup.runtime.*;
 import ids.*;
 
+/* Code to embed in parser */
+
 parser code {:
 
     public void report_error(String msg, Object i) {
@@ -47,19 +49,34 @@ parser code {:
     
 :};
 
-/* */
+/* Grammar terminals */
 
-terminal String STRING, IP, REGEXP;
+terminal String STRING; //catches flags as well
+terminal String REGEXP;
+terminal String IP;
+
 terminal Integer PORT;
 
-terminal ANY, SET_IP, SET_TYPE, RECV, SEND, SET_PROTO, TCP, UDP, WITH_FLAGS;
-terminal SET_HOST, NLINE, SET_NAME, TCP_STREAM, PROTOCOL, SET_SRC, SET_DST;
+/* Grammar keywords */
 
-/*
-non terminal Object file, rule_list, host, rule, tcp_stream_rule, proto;
-non terminal Object protocol_rule, sub_rule, port, ip, direction;
-non terminal Object sub_rules;
-*/
+terminal WITH_FLAGS;
+terminal TCP_STREAM;
+terminal SET_PROTO;
+terminal SET_TYPE;
+terminal SET_HOST;
+terminal SET_NAME;
+terminal PROTOCOL;
+terminal SET_SRC;
+terminal SET_DST;
+terminal SET_IP;
+terminal NLINE;
+terminal RECV;
+terminal SEND;
+terminal TCP;
+terminal UDP;
+terminal ANY;
+
+/* Grammar non terminals */
 
 non terminal ThreatDefinition file;
 non terminal AbstractRuleList rule_list;
@@ -74,25 +91,33 @@ non terminal ProtocolSubruleList sub_rules;
 non terminal String ip, direction, proto, host;
 non terminal Integer port;
 
-/* */
+/* Grammar */
 
-file ::= host rule_list;
+file ::= host : ip rule_list : l
+         {: RESULT = new ThreatDefinition(ip, l); :};
 
-rule_list ::= rule | rule_list rule;
+rule_list ::= rule : r
+              {: RESULT = new AbstractRuleList(r); :}            
+              | rule_list : l rule : r
+              {: l.add(r); RESULT = l; :};
 
-host ::= SET_HOST IP NLINE NLINE;
+host ::= SET_HOST IP : ip NLINE NLINE
+         {: RESULT = new String(ip); :};
 
-rule ::= SET_NAME STRING NLINE
-         tcp_stream_rule NLINE
+rule ::= SET_NAME STRING : n NLINE
+         tcp_stream_rule : r NLINE
+         {: r.setName(n); RESULT = r; :}
          |
-         SET_NAME STRING NLINE
-         protocol_rule NLINE;
+	 SET_NAME STRING : n NLINE
+         protocol_rule : r NLINE
+         {: r.setName(n); RESULT = r; :};
 
 tcp_stream_rule ::= SET_TYPE TCP_STREAM NLINE
-                    SET_SRC port NLINE
-                    SET_DST port NLINE
-                    SET_IP ip NLINE 
-                    direction REGEXP NLINE;
+                    SET_SRC port : sp NLINE
+                    SET_DST port : dp NLINE
+                    SET_IP ip : ip NLINE 
+                    direction : d REGEXP : r NLINE
+                    {: RESULT = new TcpRule(sp, dp, ip, d.equals("SEND") ? true : false, r); :};
 
 protocol_rule ::= SET_TYPE PROTOCOL NLINE
                   SET_PROTO proto : p NLINE
@@ -102,7 +127,8 @@ protocol_rule ::= SET_TYPE PROTOCOL NLINE
                   sub_rules : l
 		  {: RESULT = new ProtocolRule(p.equals("TCP") ? true : false, sp, dp, ip, l); :};
 
-sub_rules ::= sub_rule : r {: RESULT = new ProtocolSubruleList(r); :}
+sub_rules ::= sub_rule : r
+              {: RESULT = new ProtocolSubruleList(r); :}
               |
 	      sub_rules : l sub_rule : r 
 	      {: l.add(r); RESULT = l; :};
@@ -112,7 +138,7 @@ sub_rule ::= direction : d REGEXP : r NLINE
              |
              direction : d REGEXP : r WITH_FLAGS STRING : f NLINE
              {: parser.check_flags(f);
-                RESULT = new ProtocolSubrule(d.equals("SEND") ? true : false, r, ""); :}
+                RESULT = new ProtocolSubrule(d.equals("SEND") ? true : false, r, f); :}
              |
              direction : d REGEXP : r WITH_FLAGS NLINE
              {: RESULT = new ProtocolSubrule(d.equals("SEND") ? true : false, r, ""); :};
