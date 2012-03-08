@@ -1,8 +1,12 @@
+package parse;
+
 import java_cup.runtime.*;
+import parse.*;
 
 %%
 
 %class lexer
+%public
 
 %line
 %column

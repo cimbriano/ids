@@ -1,4 +1,6 @@
 .DS_Store
 /bin/*.class
-/src/parser/*.java
-/src/parser/*.java~
+/bin/*/*.class
+/src/parse/*.java
+/src/parse/*.java~
+/src/test/*.class

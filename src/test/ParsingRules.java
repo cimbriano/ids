@@ -1,5 +1,5 @@
 import java.io.*;
-import ids.*;
+import def.*;
 
 public class ParsingRules {
 

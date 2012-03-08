@@ -1,4 +1,4 @@
-CPATH = ../../lib:../../bin:.
+CPATH = ../../bin:../../lib
 BLD = ../../bin
 SRC = .
 PKG = $(BLD)/ids
@@ -6,10 +6,7 @@ PKG = $(BLD)/ids
 JAVAOPTS = -classpath $(CPATH) -d $(BLD)
 JAVAC = javac
 
-CLASSES = $(PKG)/AbstractRule.class $(PKG)/Rule.class $(PKG)/RuleList.class \
-          $(PKG)/ProtocolSubrule.class $(PKG)/ProtocolSubruleList.class \
-          $(PKG)/ProtocolRule.class $(PKG)/TcpRule.class \
-          $(PKG)/ThreatDefinition.class
+CLASSES = $(PKG)/IDS.class
 
 .PHONY: all clean
 

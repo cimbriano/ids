@@ -1,5 +1,7 @@
+package parse;
+
 import java_cup.runtime.*;
-import ids.*;
+import def.*;
 
 /* Code to embed in parser */
 

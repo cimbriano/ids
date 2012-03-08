@@ -1,11 +1,12 @@
-CPATH = ../../lib:../../bin:.
+CPATH = ../../bin:../../lib
 BLD = ../../bin
 SRC = .
+PKG = $(BLD)/parse
 
 JAVAOPTS = -classpath $(CPATH) -d $(BLD)
 JAVAC = javac
 
-CLASSES = $(BLD)/parser.class $(BLD)/lexer.class
+CLASSES = $(PKG)/sym.class $(PKG)/lexer.class $(PKG)/parser.class
 
 .PHONY: all clean
 
@@ -14,5 +15,5 @@ all: $(CLASSES)
 clean:
 	rm -fv $(CLASSES)
 
-$(BLD)/%.class: %.java
+$(PKG)/%.class: %.java
 	$(JAVAC) $(JAVAOPTS) $<

@@ -1,4 +1,4 @@
-package ids;
+package def;
 
 public class TcpRule implements AbstractRule
 {
