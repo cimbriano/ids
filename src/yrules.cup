@@ -30,11 +30,26 @@ parser code {:
 	System.exit(1);
     }
 
+    public void check_flags(String flags) {
+	for (int x = 0; x < flags.length(); x++)
+	    switch (flags.charAt(x)) {
+	    case 'S':
+	    case 'A':
+	    case 'F':
+	    case 'R':
+	    case 'P':
+	    case 'U':
+		break;
+	    default:
+		report_fatal_error("Malformed flags", flags);
+	    }
+    }
+    
 :};
 
 /* */
 
-terminal STRING, IP, REGEXP;
+terminal String STRING, IP, REGEXP;
 terminal Integer PORT;
 
 terminal ANY, SET_IP, SET_TYPE, RECV, SEND, SET_PROTO, TCP, UDP, WITH_FLAGS;
@@ -54,12 +69,10 @@ non terminal TcpRule tcp_stream_rule;
 
 non terminal ProtocolRule protocol_rule;
 non terminal ProtocolSubrule sub_rule;
-non terminal SortedProtocolSubruleList sub_rules;
+non terminal ProtocolSubruleList sub_rules;
 
 non terminal String ip, direction, proto, host;
 non terminal Integer port;
-
-
 
 /* */
 
@@ -82,24 +95,48 @@ tcp_stream_rule ::= SET_TYPE TCP_STREAM NLINE
                     direction REGEXP NLINE;
 
 protocol_rule ::= SET_TYPE PROTOCOL NLINE
-                  SET_PROTO proto NLINE
-                  SET_SRC port NLINE
-                  SET_DST port NLINE
-                  SET_IP ip NLINE
-                  sub_rules;
+                  SET_PROTO proto : p NLINE
+                  SET_SRC port : sp NLINE
+                  SET_DST port : dp NLINE
+                  SET_IP ip : ip NLINE
+                  sub_rules : l
+		  {: RESULT = new ProtocolRule(p.equals("TCP") ? true : false, sp, dp, ip, l); :};
 
-sub_rules ::= sub_rule | sub_rule sub_rules;
+sub_rules ::= sub_rule : r {: RESULT = new ProtocolSubruleList(r); :}
+              |
+	      sub_rules : l sub_rule : r 
+	      {: l.add(r); RESULT = l; :};
 
-sub_rule ::= direction REGEXP NLINE
+sub_rule ::= direction : d REGEXP : r NLINE
+             {: RESULT = new ProtocolSubrule(d.equals("SEND") ? true : false, r, ""); :}
              |
-             direction REGEXP WITH_FLAGS STRING NLINE
+             direction : d REGEXP : r WITH_FLAGS STRING : f NLINE
+             {: parser.check_flags(f);
+                RESULT = new ProtocolSubrule(d.equals("SEND") ? true : false, r, ""); :}
              |
-             direction REGEXP WITH_FLAGS NLINE;
+             direction : d REGEXP : r WITH_FLAGS NLINE
+             {: RESULT = new ProtocolSubrule(d.equals("SEND") ? true : false, r, ""); :};
 
-proto ::= TCP | UDP;
+proto ::= TCP
+          {: RESULT = new String("TCP"); :}
+          |
+          UDP
+          {: RESULT = new String("UDP"); :};
 
-direction ::= RECV | SEND;
+direction ::= RECV
+              {: RESULT = new String("RECV"); :}
+              |
+	      SEND
+              {: RESULT = new String("SEND"); :};
 
-ip ::= IP | ANY;
+ip ::= IP : ip
+       {: RESULT = new String(ip); :}
+       |
+       ANY
+       {: RESULT = new String("*.*.*.*"); :};
 
-port ::= PORT | ANY;
+port ::= PORT : p
+         {: RESULT = new Integer(p.intValue()); :}
+         |
+	 ANY
+         {: RESULT = new Integer(0); :};

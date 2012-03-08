@@ -7,9 +7,9 @@ JAVAOPTS = -classpath $(CPATH) -d $(BLD)
 JAVAC = javac
 
 CLASSES = $(PKG)/AbstractRule.class $(PKG)/AbstractRuleList.class \
-          $(PKG)/ProtocolSubrule.class $(PKG)/ProtocolRule.class \
-          $(PKG)/SortedProtocolSubruleList.class $(PKG)/TcpRule.class \
-          $(PKG)/ThreatDefinition.class $(PKG)/Subrule.class
+          $(PKG)/ProtocolSubrule.class $(PKG)/ProtocolSubruleList.class \
+          $(PKG)/ProtocolRule.class $(PKG)/TcpRule.class \
+          $(PKG)/ThreatDefinition.class
 
 .PHONY: all clean
 
