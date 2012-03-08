@@ -10,14 +10,13 @@ public class ProtocolRule implements AbstractRule
     final Integer dstPort;
     final String ip;
 
-    public ProtocolRule(boolean tcp, Integer src, Integer dst, String a,
-			ProtocolSubruleList rules) {
+    public ProtocolRule(boolean tcp, Integer src, Integer dst, String ip,
+			ProtocolSubruleList r) {
 	isTcp = tcp;
-	srcPort = new Integer(src.intValue());
-	dstPort = new Integer(dst.intValue());
-	ip = new String(a);
-
-	subrules = rules;
+	srcPort = src;
+	dstPort = dst;
+	this.ip = ip;
+	subrules = r;
     }
 
     public void printRule() {

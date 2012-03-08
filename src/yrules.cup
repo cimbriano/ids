@@ -102,7 +102,7 @@ rule_list ::= rule : r
               {: l.add(r); RESULT = l; :};
 
 host ::= SET_HOST IP : ip NLINE NLINE
-         {: RESULT = new String(ip); :};
+         {: RESULT = ip; :};
 
 rule ::= SET_NAME STRING : n NLINE
          tcp_stream_rule : r NLINE
@@ -156,13 +156,13 @@ direction ::= RECV
               {: RESULT = new String("SEND"); :};
 
 ip ::= IP : ip
-       {: RESULT = new String(ip); :}
+       {: RESULT = ip; :}
        |
        ANY
        {: RESULT = new String("*.*.*.*"); :};
 
 port ::= PORT : p
-         {: RESULT = new Integer(p.intValue()); :}
+         {: RESULT = p; :}
          |
 	 ANY
          {: RESULT = new Integer(0); :};

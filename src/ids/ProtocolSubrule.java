@@ -9,7 +9,7 @@ public class ProtocolSubrule
     final String regexp;
 
     public ProtocolSubrule(boolean s, String r, String f) {
-	regexp = new String(r);
+	regexp = r;
 	isSend = s;
 
 	for (int x = 0; x < f.length(); x++)

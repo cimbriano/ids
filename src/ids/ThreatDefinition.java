@@ -5,8 +5,8 @@ public class ThreatDefinition
     final RuleList rules;
     final String ip;
 
-    public ThreatDefinition(String a, RuleList l) {
-	ip = new String(a);	
+    public ThreatDefinition(String ip, RuleList l) {
+	this.ip = ip;	
 	rules = l;
     }
 

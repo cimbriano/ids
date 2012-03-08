@@ -8,12 +8,12 @@ public class TcpRule implements AbstractRule
     final boolean isSend;
     final String  regexp;
 
-    public TcpRule(Integer src, Integer dst, String a, boolean s, String r) {
-	srcPort = new Integer(src.intValue());
-	dstPort = new Integer(dst.intValue());
-	ip = new String(a);
-	isSend = s;
-	regexp = new String(r);
+    public TcpRule(Integer src, Integer dst, String ip, boolean s, String r) {
+	this.ip = ip;
+	srcPort = src;
+	dstPort = dst;
+	isSend  = s;
+	regexp  = r;
     }
 
     public void printRule() {
