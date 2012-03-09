@@ -1,7 +1,5 @@
 package def;
 
-import java.util.List;
-
 public class ProtocolRule implements AbstractRule
 {
     final ProtocolSubruleList subrules;
