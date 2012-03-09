@@ -1,2 +1,27 @@
 Notes:
 1. Change grammar to allow any number of new lines after a TCP rule or a udp rule
+
+
+
+TODO:
+
+1. IDSListener implements PacketListener
+	* Upon recieving packet, put it in a data strcuture 
+	that routes that pack to the correct set of packets
+	representing what will be constructed inot a stream.
+	
+	* Has refernce to IDSScanner 
+	
+	
+	
+IDSScanner(ThreatDefinition rules) 
+	* public void scan(Packet)
+		- Scans a packet against the rules of the threat definition
+		- Alerts if rules are matched
+	
+	* public void scan(TCPStreamObject)
+		- Scans tcp stream against all the rules fo the threat definition
+		- Alerts if rules is matched
+
+	* alertMethod(Packet)
+		- Sends output to StdOut alerting of the rules detection. 

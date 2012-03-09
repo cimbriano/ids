@@ -13,9 +13,9 @@ public class IDS
      * @param args
      */
     public static void main(String[] argv) {
-	if (argv.length < 2) die(usage);	
+    	if (argv.length < 2) die(usage);	
 
-	ThreatDefinition d = loadDefinition(argv[0]);
+    	ThreatDefinition d = loadDefinition(argv[0]);
     }
 
     private static ThreatDefinition loadDefinition(String fname) {
@@ -28,7 +28,7 @@ public class IDS
 	} catch (FileNotFoundException e) {
 	    die("File not found: "+fname);
 	} catch (Exception e) {
-	    die("Parser exception: "+e.getMessage());
+		die("Parser exception: "+e.getMessage());
 	}
 
 	die("Error loading ThreatDefinition: "+fname);
@@ -37,8 +37,8 @@ public class IDS
     }
 
     private static void die(String msg) {
-	System.err.println(msg);
-	System.exit(1);
+    	System.err.println(msg);
+    	System.exit(1);
     }
 
 }
