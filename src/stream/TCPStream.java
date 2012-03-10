@@ -15,6 +15,7 @@ public class TCPStream implements AbstractStream {
 		streamKey = key;		
 	}
 
+	@Override
 	public StreamKey getKey() {
 		return null;
 	}
