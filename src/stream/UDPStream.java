@@ -30,14 +30,12 @@ public class UDPStream implements AbstractStream {
 
 	@Override
 	public Iterator<IPPacket> iterator() {
-		// TODO Auto-generated method stub
 		return packetList.iterator();
 	}
 
 	@Override
 	public void add(IPPacket packet) {
-		// TODO Auto-generated method stub
-		
+		packetList.add(packet);		
 	}
 	
 	
