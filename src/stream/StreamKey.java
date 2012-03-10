@@ -42,10 +42,10 @@ public class StreamKey
 	if (dst_port != k.dst_port)
 	    return false;
 
-	if (src_ip != k.src_ip)
+	if (!src_ip.equals(k.src_ip))
 	    return false;
 
-	if (dst_ip != k.dst_ip)
+	if (!dst_ip.equals(k.dst_ip))
 	    return false;
 
 	if (isTCP != k.isTCP)
