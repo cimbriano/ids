@@ -1,19 +1,18 @@
 package stream;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.ArrayList;
+import java.util.Collections;
 import net.sourceforge.jpcap.net.IPPacket;
 
 public class TCPStream implements AbstractStream {
-
 	ArrayList<IPPacket> packetList;
 	StreamKey streamKey;
 	
 	public TCPStream(StreamKey key){
-	//TODO Might need to define a comparator
 		packetList = new ArrayList<IPPacket>();
-		streamKey = key;
-		
+		streamKey = key;		
 	}
 
 	public StreamKey getKey() {
@@ -22,19 +21,18 @@ public class TCPStream implements AbstractStream {
 
 	@Override
 	public boolean isTCP() {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isUDP() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public Iterator<IPPacket> iterator() {
-		// TODO Auto-generated method stub
+	//Inline sort.
+		Collections.sort(packetList, new IPPacketComparator());
 		return packetList.iterator();
 	}
 
@@ -42,6 +40,17 @@ public class TCPStream implements AbstractStream {
 	public void add(IPPacket packet) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	
+	private class IPPacketComparator implements Comparator<IPPacket> {
+	
+		@Override
+		public int compare(IPPacket o1, IPPacket o2) {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+	
 	}
 	
 }
