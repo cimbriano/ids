@@ -1,15 +1,15 @@
 package stream;
 
 import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import net.sourceforge.jpcap.net.IPPacket;
 
 public class UDPStream implements AbstractStream {
-	LinkedList<IPPacket> packetList;
+	ArrayList<IPPacket> packetList;
 	StreamKey streamKey;
 	
 	public UDPStream(StreamKey key){
-		packetList = new LinkedList<IPPacket>();
+		packetList = new ArrayList<IPPacket>();
 		streamKey = key;
 	}
 	
