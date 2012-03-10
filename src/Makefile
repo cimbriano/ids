@@ -13,12 +13,14 @@ CLASSES = $(BLD)/parser.java $(BLD)/lexer.java
 .PHONY: all clean
 
 all: $(CLASSES)
+	cd stream; make
 	cd def; make
 	cd parse; make
 	cd ids; make
 
 clean:
 	rm -fv $(CLASSES)
+	cd stream; make clean
 	cd def; make clean
 	cd parse; make clean
 	cd ids; make clean
