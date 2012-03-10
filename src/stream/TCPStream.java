@@ -1,9 +1,20 @@
 package stream;
 
 import java.util.Iterator;
+import java.util.TreeSet;
 import net.sourceforge.jpcap.net.IPPacket;
 
 public class TCPStream implements AbstractStream {
+
+	TreeSet packetList;
+	StreamKey streamKey;
+	
+	public TCPStream(StreamKey key){
+	//TODO Might need to define a comparator
+		packetList = new TreeSet();
+		streamKey = key;
+		
+	}
 
 	public StreamKey getKey() {
 		return null;
