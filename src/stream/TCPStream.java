@@ -5,31 +5,58 @@ import net.sourceforge.jpcap.net.IPPacket;
 
 public class TCPStream implements AbstractStream {
 
-    public boolean isTCP() {
-	// TODO Auto-generated method stub
-	return false;
-    }
+	public StreamKey getKey() {
+		return null;
+	}
 
+	@Override
+	public boolean isTCP() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
-    public boolean isUDP() {
-	// TODO Auto-generated method stub
-	return false;
-    }
+	@Override
+	public boolean isUDP() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
+	@Override
+	public Iterator<IPPacket> iterator() {
+		// TODO Auto-generated method stub
+		return new TCPStreamIterator(this);
+	}
 
-    public Iterator<IPPacket> iterator() {
-	// TODO Auto-generated method stub
-	return null;
-    }
-
-
-    public void add(IPPacket packet) {
-	// TODO Auto-generated method stub
+	@Override
+	public void add(IPPacket packet) {
+		// TODO Auto-generated method stub
+		
+	}
 	
-    }
+	private class TCPStreamIterator implements Iterator<IPPacket> {
+	
+		public TCPStreamIterator(TCPStream tcpStream){
+			//TODO this should take a parameter
+		}
 
-    public StreamKey getKey() {
-	return null;
-    }
-    	
+		@Override
+		public boolean hasNext() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public IPPacket next() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public void remove() {
+			// TODO Auto-generated method stub
+			
+		}
+		
+	}
+
 }
