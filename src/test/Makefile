@@ -1,4 +1,4 @@
-CPATH = ../../bin:../../lib
+CPATH = ../../bin:../../lib:../../lib/jpcap/jpcap.jar
 BLD = .
 SRC = .
 
@@ -7,7 +7,7 @@ JAVAC = javac
 
 JAVA = java
 
-CLASSES = ParsingRules.class
+CLASSES = ParsingRules.class ReadingFromPcap.class
 
 .PHONY: all clean
 

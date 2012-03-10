@@ -1,8 +1,14 @@
 package ids;
 
-public class IDSListener implements PacketListener{
+import ids.*;
+
+public class IDSListener implements PacketListener {
+
+    final HashMap<StreamKey, AbstractStream> streams; 
 	
-	public void packetArrvied(Packet p){
-		
-	}
+    public void packetArrvied(Packet p){
+	
+    }
+
+    
 }

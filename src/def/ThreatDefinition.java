@@ -1,6 +1,8 @@
 package def;
 
-public class ThreatDefinition
+import java.util.*;
+
+public class ThreatDefinition implements Iterable<Rule>
 {
     final RuleList rules;
     final String ip;
@@ -16,4 +18,9 @@ public class ThreatDefinition
 	for (Rule r : rules)
 	    r.printRule();
     }
+
+    public Iterator<Rule> iterator() {
+	return rules.iterator();
+    }
+
 }
