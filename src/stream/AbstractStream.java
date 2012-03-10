@@ -6,4 +6,5 @@ public interface AbstractStream extends Iterable<IPPacket> {
 	public boolean isTCP();
 	public boolean isUDP();
 	public void add(IPPacket packet);
+	public StreamKey getKey();
 }

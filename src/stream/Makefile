@@ -1,12 +1,13 @@
 CPATH = ../../bin:../../lib:../../lib/jpcap/jpcap.jar
 BLD = ../../bin
 SRC = .
-PKG = $(BLD)/ids
+PKG = $(BLD)/stream
 
 JAVAOPTS = -classpath $(CPATH) -d $(BLD)
 JAVAC = javac
 
-CLASSES = $(PKG)/AbstractStream.class $(PKG)/TCPStream.class $(PKG)/UDPStream.class
+CLASSES = $(PKG)/StreamKey.class $(PKG)/AbstractStream.class \
+          $(PKG)/TCPStream.class $(PKG)/UDPStream.class
 
 .PHONY: all clean
 
