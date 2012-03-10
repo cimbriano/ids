@@ -14,7 +14,7 @@ public class UDPStream implements AbstractStream {
 	@Override
 	public boolean isUDP() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
