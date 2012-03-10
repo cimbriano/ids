@@ -1,4 +1,4 @@
-package ids;
+package stream;
 
 import net.sourceforge.jpcap.net.IPPacket;
 

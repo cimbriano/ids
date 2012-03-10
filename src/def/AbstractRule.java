@@ -1,6 +1,6 @@
 package def;
 
-import ids.AbstractStream;
+import stream.*;
 
 interface AbstractRule {
 	
@@ -8,4 +8,5 @@ interface AbstractRule {
    
    //TODO Maybe return an object with alert info 
    public void scan(AbstractStream stream);
+
 }

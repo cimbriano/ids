@@ -2,7 +2,7 @@ package def;
 
 import java.util.Iterator;
 
-import ids.AbstractStream;
+import stream.*;
 
 public class ProtocolRule implements AbstractRule
 {
