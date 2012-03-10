@@ -6,7 +6,7 @@ PKG = $(BLD)/ids
 JAVAOPTS = -classpath $(CPATH) -d $(BLD)
 JAVAC = javac
 
-CLASSES = $(PKG)/IDS.class $(PKG)/IDSScanner.class $(PKG)/IDSListener.class
+CLASSES = $(PKG)/IDSScanner.class $(PKG)/IDSListener.class $(PKG)/IDS.class
 
 .PHONY: all clean
 

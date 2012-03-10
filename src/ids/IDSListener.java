@@ -50,7 +50,7 @@ public class IDSListener implements PacketListener {
 	if (streams.containsKey(k))
 	    return streams.get(k);
 
-	AbstractStream stream = isTCP ? new TCPStream() : new UDPStream();
+	AbstractStream stream = isTCP ? new TCPStream(k) : new UDPStream(k);
 	streams.put(k, stream);
 
 	return stream;
