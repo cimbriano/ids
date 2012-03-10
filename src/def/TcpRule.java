@@ -1,6 +1,6 @@
 package def;
 
-import ids.AbstractStream;
+import stream.*;
 
 public class TcpRule implements AbstractRule {
 	final Integer srcPort;
