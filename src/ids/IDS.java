@@ -1,5 +1,8 @@
 package ids;
 
+import net.sourceforge.jpcap.capture.*;
+import net.sourceforge.jpcap.net.*;
+
 import java.util.*;
 import java.io.*;
 import parse.*;
@@ -13,9 +16,29 @@ public class IDS
      * @param args
      */
     public static void main(String[] argv) {
-    	if (argv.length < 2) die(usage);	
+    	if (argv.length < 2)
+	    die(usage);
 
-    	ThreatDefinition d = loadDefinition(argv[0]);
+	String rules = argv[0];
+	String pfile = argv[1];
+
+    	ThreatDefinition def = loadDefinition(rules);
+	IDSListener listener = new IDSListener(new IDSScanner(def));
+
+	packetCapture(listener, pfile);	
+    }
+
+    private static void packetCapture(IDSListener listener, String pfile) {
+	PacketCapture pc = new PacketCapture();
+
+	try {
+	    pc.addPacketListener(listener);
+	    pc.openOffline(pfile);
+	    pc.capture(-1);
+	} catch (CaptureFileOpenException e) {
+	    die("Could not open file: "+e.getMessage());
+	} catch (CapturePacketException e) {
+	}
     }
 
     private static ThreatDefinition loadDefinition(String fname) {

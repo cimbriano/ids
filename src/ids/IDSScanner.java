@@ -1,12 +1,19 @@
 package ids;
 
-import def.ThreatDefinition;
+import stream.*;
+import def.*;
 
-public class IDSScanner {
+public class IDSScanner
+{
+    final ThreatDefinition threat;
 	
-	public IDSScanner(ThreatDefinition t){
-		
-	}
-	
-	//Get alertObject from RULE?
+    public IDSScanner(ThreatDefinition t){
+	threat = t;
+    }
+
+    public void scan(AbstractStream stream) {
+	for (Rule r : threat)
+	    r.scan(stream);
+    }
+
 }

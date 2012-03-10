@@ -2,7 +2,7 @@ package def;
 
 import stream.*;
 
-interface AbstractRule {
+public interface AbstractRule {
 	
    public void printRule();
    

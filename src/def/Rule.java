@@ -1,5 +1,7 @@
 package def;
 
+import stream.*;
+
 public class Rule
 {
     final String name;
@@ -10,8 +12,12 @@ public class Rule
 	contents = c;
     }
 
-    void printRule() {
+    public void printRule() {
 	System.out.print("name="+name+"\n");
 	contents.printRule();
     }
+
+    public void scan(AbstractStream stream) {
+	contents.scan(stream);
+    }    
 }

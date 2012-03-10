@@ -48,4 +48,5 @@ public class ProtocolRule implements AbstractRule
 		// TODO Auto-generated method stub
 		
 	}
+
 }
