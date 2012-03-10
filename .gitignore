@@ -4,3 +4,4 @@
 /src/parse/*.java
 /src/parse/*.java~
 /src/test/*.class
+/bin/
