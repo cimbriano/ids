@@ -3,7 +3,7 @@ BLD = ../../bin
 SRC = .
 PKG = $(BLD)/ids
 
-JAVAOPTS = -classpath $(CPATH) -d $(BLD)
+JAVAOPTS = -classpath $(CPATH) -d $(BLD) -Xlint:unchecked
 JAVAC = javac
 
 CLASSES = $(PKG)/AbstractStream.class $(PKG)/TCPStream.class $(PKG)/UDPStream.class
