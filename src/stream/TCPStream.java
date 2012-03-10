@@ -1,9 +1,20 @@
 package stream;
 
 import java.util.Iterator;
+import java.util.ArrayList;
 import net.sourceforge.jpcap.net.IPPacket;
 
 public class TCPStream implements AbstractStream {
+
+	ArrayList<IPPacket> packetList;
+	StreamKey streamKey;
+	
+	public TCPStream(StreamKey key){
+	//TODO Might need to define a comparator
+		packetList = new ArrayList<IPPacket>();
+		streamKey = key;
+		
+	}
 
 	public StreamKey getKey() {
 		return null;
@@ -24,7 +35,7 @@ public class TCPStream implements AbstractStream {
 	@Override
 	public Iterator<IPPacket> iterator() {
 		// TODO Auto-generated method stub
-		return new TCPStreamIterator(this);
+		return packetList.iterator();
 	}
 
 	@Override
@@ -33,30 +44,4 @@ public class TCPStream implements AbstractStream {
 		
 	}
 	
-	private class TCPStreamIterator implements Iterator<IPPacket> {
-	
-		public TCPStreamIterator(TCPStream tcpStream){
-			//TODO this should take a parameter
-		}
-
-		@Override
-		public boolean hasNext() {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
-		@Override
-		public IPPacket next() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public void remove() {
-			// TODO Auto-generated method stub
-			
-		}
-		
-	}
-
 }
