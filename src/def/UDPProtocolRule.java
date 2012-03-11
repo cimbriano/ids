@@ -7,6 +7,8 @@ import def.*;
 
 public class UDPProtocolRule implements AbstractRule
 {
+    final UDPProtocolRuleChecker checker;
+
     final ProtocolSubruleList subrules;
     final int srcPort;
     final int dstPort;
@@ -17,12 +19,14 @@ public class UDPProtocolRule implements AbstractRule
 	dstPort = dst;
 	this.ip = ip;
 	subrules = r;
+
+	checker = new UDPProtocolRuleChecker(subrules.size());
     }
 
     @Override
     public void scan(IPPacket packet) {
 	if (packet instanceof UDPPacket) {
-
+	    checker.add( (UDPPacket) packet );
 	}
    }
 

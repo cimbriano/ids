@@ -1,13 +1,26 @@
 package def;
 
 import net.sourceforge.jpcap.net.UDPPacket;
+import java.util.*;
 
-public class UDPProtocolRuleChecker implements AbstractProtocolRuleChecker<UDPPacket> {
+public class UDPProtocolRuleChecker implements AbstractProtocolRuleChecker<UDPPacket>
+{
+    final List<UDPPacket[]> store;
+    final int ssize;
 
-	@Override
-	public void add(UDPPacket packet) {
-		// TODO Auto-generated method stub
-		
-	}
+    public UDPProtocolRuleChecker(int subrules) {
+	store = new ArrayList<UDPPacket[]>();
+	ssize = subrules;
+    }
+
+    @Override
+    public void add(UDPPacket packet) {
+	for (UDPPacket[] partialMatch : store) {
+	    
+	    
+
+
+	}		
+    }
 
 }
