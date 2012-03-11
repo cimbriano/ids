@@ -21,8 +21,9 @@ public class TcpRule implements AbstractRule
 
      @Override
      public void scan(IPPacket packet) {
-	 // TODO Auto-generated method stub
+	 if (packet instanceof TCPPacket) {
 
+	 }
      }
 
      /*
