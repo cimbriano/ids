@@ -7,8 +7,8 @@ public class IDSScanner
 {
     final ThreatDefinition threat;
 	
-    public IDSScanner(ThreatDefinition t){
-	threat = t;
+    public IDSScanner(ThreatDefinition threat){
+	this.threat = threat;
     }
 
     public void scan(AbstractStream stream) {

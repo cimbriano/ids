@@ -12,12 +12,17 @@ public class Rule
 	contents = c;
     }
 
+    public void scan(AbstractStream stream) {
+	contents.scan(stream);
+    }    
+
+    /*
+     *
+     */
+
     public void printRule() {
 	System.out.print("name="+name+"\n");
 	contents.printRule();
     }
 
-    public void scan(AbstractStream stream) {
-	contents.scan(stream);
-    }    
 }
