@@ -21,7 +21,10 @@ public class UDPProtocolRule implements AbstractRule
 
     @Override
     public void scan(IPPacket packet) {
-    }
+	if (packet instanceof UDPPacket) {
+
+	}
+   }
 
     /*
      *
