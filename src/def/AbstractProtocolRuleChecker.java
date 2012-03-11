@@ -2,10 +2,8 @@ package def;
 
 import net.sourceforge.jpcap.net.IPPacket;
 
+public interface AbstractProtocolRuleChecker<T extends IPPacket, S extends AbstractRule> {
 
-public interface AbstractProtocolRuleChecker<T extends IPPacket>
-{
-    
-    public void add(T packet);
-    
+	public void add(T packet, S rule);
+
 }

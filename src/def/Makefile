@@ -26,3 +26,4 @@ clean:
 
 $(PKG)/%.class: %.java
 	$(JAVAC) $(JAVAOPTS) *.java
+
