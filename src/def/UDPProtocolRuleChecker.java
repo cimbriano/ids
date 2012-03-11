@@ -43,9 +43,16 @@ public class UDPProtocolRuleChecker implements AbstractProtocolRuleChecker<UDPPa
 	    store.add(l);
 	} //new partialMatch
 
+	toRemove =  new ArrayList<List<UDPPacket>>(); 
+
 	for (List<UDPPacket> list : store)
-	    if (list.size() == ssize)
+	    if (list.size() == ssize) {
 		System.out.println("ZOMG!!! AlErT!!!!");
+		toRemove.add(list);
+	    }
+
+	for (List<UDPPacket> list : toRemove)//cleanup store
+	    store.remove(list);
 
     }
 
@@ -57,7 +64,7 @@ public class UDPProtocolRuleChecker implements AbstractProtocolRuleChecker<UDPPa
     }
 
     private boolean matchNextSubRule(List<UDPPacket> partialMatch, UDPPacket candidate, UDPProtocolRule rule, String host) {
-	int nextIndex = partialMatch.size() + 1;
+	int nextIndex = partialMatch.size();
 	return matchSubRule(candidate, rule, (partialMatch.isEmpty() ? 0 : nextIndex), host);
     }
 
@@ -106,7 +113,7 @@ public class UDPProtocolRuleChecker implements AbstractProtocolRuleChecker<UDPPa
 
 	boolean found = m.find();
 
-	if (found) System.out.println(data);
+	//if (found) System.out.println(data);
 
 	return found;
     }
