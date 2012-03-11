@@ -25,4 +25,4 @@ clean:
 	rm -fv $(CLASSES)
 
 $(PKG)/%.class: %.java
-	$(JAVAC) $(JAVAOPTS) $<
+  $(JAVAC) $(JAVAOPTS) $<
