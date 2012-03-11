@@ -8,7 +8,7 @@ JAVAC = javac
 
 CLASSES = $(PKG)/AbstractRule.class $(PKG)/Rule.class $(PKG)/RuleList.class \
           $(PKG)/ProtocolSubrule.class $(PKG)/ProtocolSubruleList.class \
-          $(PKG)/ProtocolRule.class $(PKG)/TcpRule.class \
+          $(PKG)/TCPProtocolRule.class $(PKG)/TcpRule.class $(PKG)/UDPProtocolRule.class \
           $(PKG)/ThreatDefinition.class
 
 .PHONY: all clean

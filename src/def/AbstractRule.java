@@ -1,13 +1,13 @@
 package def;
 
+import net.sourceforge.jpcap.net.*;
 import stream.*;
 
 public interface AbstractRule
 {
 	
    public void printRule();
-   
-   //TODO Maybe return an object with alert info 
-   public void scan(AbstractStream stream);
+
+   public void scan(IPPacket packet);
 
 }

@@ -84,9 +84,9 @@ non terminal ThreatDefinition file;
 non terminal RuleList rule_list;
 non terminal Rule rule;
 
-non terminal TcpRule tcp_stream_rule;
+non terminal AbstractRule tcp_stream_rule;
 
-non terminal ProtocolRule protocol_rule;
+non terminal AbstractRule protocol_rule;
 non terminal ProtocolSubrule sub_rule;
 non terminal ProtocolSubruleList sub_rules;
 
@@ -139,7 +139,10 @@ protocol_rule ::= SET_TYPE PROTOCOL NLINE
                   SET_DST port : dp NLINE
                   SET_IP ip : ip NLINE
                   sub_rules : l
-		  {: RESULT = new ProtocolRule(p.equals("TCP") ? true : false, sp, dp, ip, l); :};
+		  {: if (p.equals("TCP"))
+			 RESULT = new TCPProtocolRule(sp, dp, ip, l);
+		     else if (p.equals("UDP"))
+			 RESULT = new UDPProtocolRule(sp, dp, ip, l); :};
 
 sub_rules ::= sub_rule : r
               {: RESULT = new ProtocolSubruleList(r); :}

@@ -1,5 +1,6 @@
 package def;
 
+import net.sourceforge.jpcap.net.*;
 import stream.*;
 
 public class Rule
@@ -12,8 +13,8 @@ public class Rule
 	contents = c;
     }
 
-    public void scan(AbstractStream stream) {
-	contents.scan(stream);
+    public void scan(IPPacket packet) {
+	contents.scan(packet);
     }    
 
     /*

@@ -31,6 +31,7 @@ public class IDS
     private static void packetCapture(IDSListener listener, String pfile) {
 	PacketCapture pc = new PacketCapture();
 
+	/* Add filter */
 	try {
 	    pc.addPacketListener(listener);
 	    pc.openOffline(pfile);

@@ -1,5 +1,6 @@
 package ids;
 
+import net.sourceforge.jpcap.net.*;
 import stream.*;
 import def.*;
 
@@ -11,9 +12,9 @@ public class IDSScanner
 	this.threat = threat;
     }
 
-    public void scan(AbstractStream stream) {
+    public void scan(IPPacket packet) {
 	for (Rule r : threat)
-	    r.scan(stream);
+	    r.scan(packet);
     }
 
 }

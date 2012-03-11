@@ -9,7 +9,9 @@ import ids.*;
 
 public class IDSListener implements PacketListener {
 
-    final HashMap<StreamKey, AbstractStream> streams = new HashMap<StreamKey, AbstractStream>();
+    //final HashMap<StreamKey, AbstractStream> streams =
+    // new HashMap<StreamKey, AbstractStream>();
+    
     final IDSScanner scanner;
 
     public IDSListener(IDSScanner scanner) {
@@ -17,15 +19,13 @@ public class IDSListener implements PacketListener {
     }
 
     public void packetArrived(Packet packet) {
-
 	TCPPacket p = (TCPPacket) packet;
 
 	System.out.print(p.toColoredVerboseString(true));
 	System.out.println(": "+p.getPayloadDataLength());
-	
-
     }
 
+    /*
     private AbstractStream packetArrived(UDPPacket p) {
 	StreamKey k = new StreamKey(false, p.getSourcePort(), p.getDestinationPort(),
 				    p.getSourceAddress(), p.getDestinationAddress());
@@ -54,6 +54,6 @@ public class IDSListener implements PacketListener {
 	streams.put(k, stream);
 
 	return stream;
-    }
+	}*/
 
 }
