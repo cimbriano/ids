@@ -1,13 +1,13 @@
 package ids;
 
 import java.util.*;
-
 import net.sourceforge.jpcap.capture.*;
 import net.sourceforge.jpcap.net.*;
 import stream.*;
 import ids.*;
 
-public class IDSListener implements PacketListener {
+public class IDSListener implements PacketListener
+{
 
     //final HashMap<StreamKey, AbstractStream> streams =
     // new HashMap<StreamKey, AbstractStream>();
@@ -19,6 +19,13 @@ public class IDSListener implements PacketListener {
     }
 
     public void packetArrived(Packet packet) {
+	if (packet instanceof IPPacket)
+	    scanner.scan( (IPPacket) packet );
+
+	/*
+	 *
+	 */
+	   
 	TCPPacket p = (TCPPacket) packet;
 
 	System.out.print(p.toColoredVerboseString(true));

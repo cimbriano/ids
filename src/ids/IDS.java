@@ -52,7 +52,7 @@ public class IDS
 	} catch (FileNotFoundException e) {
 	    die("File not found: "+fname);
 	} catch (Exception e) {
-		die("Parser exception: "+e.getMessage());
+	    die("Parser exception: "+e.getMessage());
 	}
 
 	die("Error loading ThreatDefinition: "+fname);
