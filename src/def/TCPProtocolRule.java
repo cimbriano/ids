@@ -21,6 +21,9 @@ public class TCPProtocolRule implements AbstractRule
 
     @Override
     public void scan(IPPacket packet) {
+	if (packet instanceof TCPPacket) {
+
+	}
     }
 
     /*
