@@ -9,10 +9,11 @@ JAVAC = javac
 CLASSES = $(PKG)/AbstractRule.class \
           $(PKG)/Rule.class \
           $(PKG)/AbstractProtocolRuleChecker.class $(PKG)/TCPProtocolRuleChecker.class $(PKG)/UDPProtocolRuleChecker.class \
-          $(PKG)/RuleList.class \
           $(PKG)/ProtocolSubrule.class \
           $(PKG)/ProtocolSubruleList.class \
-          $(PKG)/ProtocolRule.class \
+          $(PKG)/TCPProtocolRule.class \
+          $(PKG)/UDPProtocolRule.class \
+          $(PKG)/RuleList.class \
           $(PKG)/TcpRule.class \
           $(PKG)/ThreatDefinition.class
 
