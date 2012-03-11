@@ -7,6 +7,8 @@ import def.*;
 
 public class TCPProtocolRule implements AbstractRule
 {
+    final TCPProtocolRuleChecker checker;
+
     final ProtocolSubruleList subrules;
     final int srcPort;
     final int dstPort;
@@ -17,12 +19,14 @@ public class TCPProtocolRule implements AbstractRule
 	dstPort = dst;
 	this.ip = ip;
 	subrules = r;
+
+	checker = new TCPProtocolRuleChecker(subrules.size());
     }
 
     @Override
     public void scan(IPPacket packet, Rule rule, ThreatDefinition threat) {
 	if (packet instanceof TCPPacket) {
-
+	    checker.add( (TCPPacket) packet, this, rule.name, threat.host );
 	}
     }
 

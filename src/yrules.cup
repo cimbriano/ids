@@ -151,7 +151,7 @@ sub_rules ::= sub_rule : r
 	      {: l.add(r); RESULT = l; :};
 
 sub_rule ::= direction : d REGEXP : r NLINE
-             {: RESULT = new ProtocolSubrule(d.equals("SEND") ? true : false, r, ""); :}
+             {: RESULT = new ProtocolSubrule(d.equals("SEND") ? true : false, r, null); :}
              |
              direction : d REGEXP : r WITH_FLAGS STRING : f NLINE
              {: parser.check_flags(f);

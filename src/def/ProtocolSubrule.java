@@ -4,7 +4,7 @@ import java.util.*;
 
 public class ProtocolSubrule
 {
-    final ArrayList<Character> flags = new ArrayList<Character>();
+    final List<Character> flags;
     final boolean isSend;
     final String regexp;
 
@@ -12,7 +12,14 @@ public class ProtocolSubrule
 	regexp = r;
 	isSend = s;
 
-	for (int x = 0; x < f.length(); x++)
-	    flags.add(new Character(f.charAt(x)));
+	if (f == null) {
+	    flags = null;
+	} else {
+	    flags = new ArrayList<Character>();
+
+	    for (int x = 0; x < f.length(); x++)
+		flags.add(new Character(f.charAt(x)));
+	}
     }
+
 }

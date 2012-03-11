@@ -5,14 +5,14 @@ import java.util.regex.*;
 import java.util.*;
 import def.*;
 
-public class UDPProtocolRuleChecker implements AbstractProtocolRuleChecker<UDPPacket, UDPProtocolRule> {
+public class UDPProtocolRuleChecker extends AbstractProtocolRuleChecker<UDPPacket, UDPProtocolRule> {
 
     final List<List<UDPPacket>> store;
     final int ssize;
 
-    public UDPProtocolRuleChecker(int subrules) {
+    public UDPProtocolRuleChecker(int numSubRules) {
 	store = new ArrayList<List<UDPPacket>>();
-	ssize = subrules;
+	ssize = numSubRules;
     }
 
     @Override
@@ -104,15 +104,6 @@ public class UDPProtocolRuleChecker implements AbstractProtocolRuleChecker<UDPPa
 	    return true;
 
 	return false;
-    }
-
-    private boolean checkContents(UDPPacket packet, ProtocolSubrule subRule) {
-	String data = new String(packet.getUDPData());
-
-	Pattern p = Pattern.compile(subRule.regexp);
-	Matcher m = p.matcher(data);
-
-	return m.find();
     }
 
     private boolean matchStream(UDPPacket p1, UDPPacket p2) {

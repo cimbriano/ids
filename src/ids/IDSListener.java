@@ -21,16 +21,6 @@ public class IDSListener implements PacketListener
     public void packetArrived(Packet packet) {
 	if (packet instanceof IPPacket)
 	    scanner.scan( (IPPacket) packet );
-
-	/*
-	 *
-	 */
-	   
-	//TCPPacket p = (TCPPacket) packet;
-
-	//System.out.println(p.getSourceAddress()+"."); }
-	//System.out.print(p.toColoredVerboseString(true));
-	//System.out.println(": "+p.getPayloadDataLength());
     }
 
     /*
