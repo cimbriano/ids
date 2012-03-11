@@ -1,7 +1,5 @@
 package def;
 
-import java.util.Iterator;
-
 import stream.*;
 
 public class ProtocolRule implements AbstractRule
