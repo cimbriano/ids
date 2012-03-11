@@ -16,7 +16,7 @@ public class UDPProtocolRuleChecker implements AbstractProtocolRuleChecker<UDPPa
     }
 
     @Override
-	public void add(UDPPacket candidate, UDPProtocolRule rule, String rulename, String host) {
+    public void add(UDPPacket candidate, UDPProtocolRule rule, String rulename, String host) {
 	List<List<UDPPacket>> toRemove = new ArrayList<List<UDPPacket>>(); 
 
 	for (List<UDPPacket> partialMatch : store) {
@@ -45,6 +45,7 @@ public class UDPProtocolRuleChecker implements AbstractProtocolRuleChecker<UDPPa
 
 	toRemove =  new ArrayList<List<UDPPacket>>(); 
 
+	/* TODO */
 	for (List<UDPPacket> list : store)
 	    if (list.size() == ssize) {
 		System.out.println("ZOMG!!! AlErT!!!!");
@@ -65,7 +66,7 @@ public class UDPProtocolRuleChecker implements AbstractProtocolRuleChecker<UDPPa
 
     private boolean matchNextSubRule(List<UDPPacket> partialMatch, UDPPacket candidate, UDPProtocolRule rule, String host) {
 	int nextIndex = partialMatch.size();
-	return matchSubRule(candidate, rule, (partialMatch.isEmpty() ? 0 : nextIndex), host);
+	return matchSubRule(candidate, rule, nextIndex, host);
     }
 
     private boolean matchSubRule(UDPPacket candidate, UDPProtocolRule rule, int index, String host) {
@@ -111,11 +112,7 @@ public class UDPProtocolRuleChecker implements AbstractProtocolRuleChecker<UDPPa
 	Pattern p = Pattern.compile(subRule.regexp);
 	Matcher m = p.matcher(data);
 
-	boolean found = m.find();
-
-	//if (found) System.out.println(data);
-
-	return found;
+	return m.find();
     }
 
     private boolean matchStream(UDPPacket p1, UDPPacket p2) {
