@@ -12,15 +12,21 @@ public class ThreatDefinition implements Iterable<Rule>
 	rules = l;
     }
 
+    public Iterator<Rule> iterator() {
+	return rules.iterator();
+    }
+
+
+    /*
+     *
+     */
+
+
     public void print() {
 	System.out.print("host="+ip+"\n\n");
 
 	for (Rule r : rules)
 	    r.printRule();
-    }
-
-    public Iterator<Rule> iterator() {
-	return rules.iterator();
     }
 
 }

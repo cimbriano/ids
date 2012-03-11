@@ -84,14 +84,16 @@ non terminal ThreatDefinition file;
 non terminal RuleList rule_list;
 non terminal Rule rule;
 
-non terminal TcpRule tcp_stream_rule;
+non terminal AbstractRule tcp_stream_rule;
 
-non terminal ProtocolRule protocol_rule;
+non terminal AbstractRule protocol_rule;
 non terminal ProtocolSubrule sub_rule;
 non terminal ProtocolSubruleList sub_rules;
 
 non terminal String ip, direction, proto, host;
 non terminal Integer port;
+
+non terminal nline;
 
 /* Grammar */
 
@@ -107,12 +109,22 @@ host ::= SET_HOST IP : ip NLINE NLINE
          {: RESULT = ip; :};
 
 rule ::= SET_NAME STRING : n NLINE
-         tcp_stream_rule : r NLINE
+         tcp_stream_rule : r nline
          {: RESULT = new Rule(n, r); :}
          |
 	 SET_NAME STRING : n NLINE
-         protocol_rule : r NLINE
+         protocol_rule : r nline
+         {: RESULT = new Rule(n, r); :}
+         |
+         SET_NAME STRING : n NLINE
+         tcp_stream_rule : r
+         {: RESULT = new Rule(n, r); :}
+         |
+	 SET_NAME STRING : n NLINE
+         protocol_rule : r
          {: RESULT = new Rule(n, r); :};
+
+nline ::= nline NLINE | NLINE;
 
 tcp_stream_rule ::= SET_TYPE TCP_STREAM NLINE
                     SET_SRC port : sp NLINE
@@ -127,7 +139,10 @@ protocol_rule ::= SET_TYPE PROTOCOL NLINE
                   SET_DST port : dp NLINE
                   SET_IP ip : ip NLINE
                   sub_rules : l
-		  {: RESULT = new ProtocolRule(p.equals("TCP") ? true : false, sp, dp, ip, l); :};
+		  {: if (p.equals("TCP"))
+			 RESULT = new TCPProtocolRule(sp, dp, ip, l);
+		     else if (p.equals("UDP"))
+			 RESULT = new UDPProtocolRule(sp, dp, ip, l); :};
 
 sub_rules ::= sub_rule : r
               {: RESULT = new ProtocolSubruleList(r); :}
