@@ -5,10 +5,10 @@ import java.util.*;
 public class ThreatDefinition implements Iterable<Rule>
 {
     final RuleList rules;
-    final String ip;
+    final String host;
 
-    public ThreatDefinition(String ip, RuleList l) {
-	this.ip = ip;	
+    public ThreatDefinition(String host, RuleList l) {
+	this.host = host;	
 	rules = l;
     }
 
@@ -23,7 +23,7 @@ public class ThreatDefinition implements Iterable<Rule>
 
 
     public void print() {
-	System.out.print("host="+ip+"\n\n");
+	System.out.print("host="+host+"\n\n");
 
 	for (Rule r : rules)
 	    r.printRule();

@@ -14,7 +14,7 @@ public class IDSScanner
 
     public void scan(IPPacket packet) {
 	for (Rule r : threat)
-	    r.scan(packet);
+	    r.scan(packet, threat);
     }
 
 }

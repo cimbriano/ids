@@ -24,11 +24,11 @@ public class UDPProtocolRule implements AbstractRule
     }
 
     @Override
-    public void scan(IPPacket packet) {
+    public void scan(IPPacket packet, Rule rule, ThreatDefinition threat) {
 	if (packet instanceof UDPPacket) {
-	    checker.add( (UDPPacket) packet );
+	    checker.add( (UDPPacket) packet, this, rule.name, threat.host);
 	}
-   }
+    }
 
     /*
      *
@@ -42,7 +42,7 @@ public class UDPProtocolRule implements AbstractRule
 	System.out.print("ip="+ip+"\n");
 
 	for (ProtocolSubrule r : subrules) {
-	    System.out.print((r.isSend ? "send=" : "recv=")+r.regexp);
+	    System.out.print((r.isSend ? "send=" : "recv=")+"\""+r.regexp+"\"");
 
 	    if (!r.flags.isEmpty()) {
 		System.out.print(" with flags=");

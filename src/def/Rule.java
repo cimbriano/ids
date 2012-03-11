@@ -13,8 +13,8 @@ public class Rule
 	contents = c;
     }
 
-    public void scan(IPPacket packet) {
-	contents.scan(packet);
+    public void scan(IPPacket packet, ThreatDefinition threat) {
+	contents.scan(packet, this, threat);
     }    
 
     /*

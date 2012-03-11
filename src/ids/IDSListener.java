@@ -26,10 +26,11 @@ public class IDSListener implements PacketListener
 	 *
 	 */
 	   
-	TCPPacket p = (TCPPacket) packet;
+	//TCPPacket p = (TCPPacket) packet;
 
-	System.out.print(p.toColoredVerboseString(true));
-	System.out.println(": "+p.getPayloadDataLength());
+	//System.out.println(p.getSourceAddress()+"."); }
+	//System.out.print(p.toColoredVerboseString(true));
+	//System.out.println(": "+p.getPayloadDataLength());
     }
 
     /*

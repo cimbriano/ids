@@ -20,7 +20,7 @@ public class TCPProtocolRule implements AbstractRule
     }
 
     @Override
-    public void scan(IPPacket packet) {
+    public void scan(IPPacket packet, Rule rule, ThreatDefinition threat) {
 	if (packet instanceof TCPPacket) {
 
 	}
@@ -38,7 +38,7 @@ public class TCPProtocolRule implements AbstractRule
 	System.out.print("ip="+ip+"\n");
 
 	for (ProtocolSubrule r : subrules) {
-	    System.out.print((r.isSend ? "send=" : "recv=")+r.regexp);
+	    System.out.print((r.isSend ? "send=" : "recv=")+"\""+r.regexp+"\"");
 
 	    if (!r.flags.isEmpty()) {
 		System.out.print(" with flags=");

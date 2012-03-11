@@ -6,7 +6,7 @@ import stream.*;
 public interface AbstractRule
 {
 
-   public void scan(IPPacket packet);
+    public void scan(IPPacket packet, Rule rule, ThreatDefinition threat);
 
     /*
      *

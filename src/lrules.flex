@@ -68,7 +68,7 @@ whitespace = [ \t\f]
 {port}		{ return symbol(sym.PORT, new Integer(yytext())); }
 {ip}		{ return symbol(sym.IP, new String(yytext())); }
 {string}	{ return symbol(sym.STRING, new String(yytext())); }
-{regexp}        { return symbol(sym.REGEXP, new String(yytext())); }
+{regexp}        { String regexp = new String(yytext()); return symbol(sym.REGEXP, new String(regexp.substring(1, regexp.length()-1))); }
 {newline}       { return symbol(sym.NLINE); } 
 
 [^]             { throw new Error("Illegal character <" + yytext() + ">"); }
