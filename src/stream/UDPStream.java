@@ -13,10 +13,10 @@ public class UDPStream implements AbstractStream {
 		streamKey = key;
 	}
 	
-	@Override
-  public StreamKey getKey() {
-			return streamKey;
-  }
+        @Override
+        public StreamKey getKey() {
+	    return streamKey;
+        }
 
 	@Override
 	public boolean isTCP() {

@@ -93,6 +93,8 @@ non terminal ProtocolSubruleList sub_rules;
 non terminal String ip, direction, proto, host;
 non terminal Integer port;
 
+non terminal nline;
+
 /* Grammar */
 
 file ::= host : ip rule_list : l
@@ -107,12 +109,22 @@ host ::= SET_HOST IP : ip NLINE NLINE
          {: RESULT = ip; :};
 
 rule ::= SET_NAME STRING : n NLINE
-         tcp_stream_rule : r NLINE
+         tcp_stream_rule : r nline
          {: RESULT = new Rule(n, r); :}
          |
 	 SET_NAME STRING : n NLINE
-         protocol_rule : r NLINE
+         protocol_rule : r nline
+         {: RESULT = new Rule(n, r); :}
+         |
+         SET_NAME STRING : n NLINE
+         tcp_stream_rule : r
+         {: RESULT = new Rule(n, r); :}
+         |
+	 SET_NAME STRING : n NLINE
+         protocol_rule : r
          {: RESULT = new Rule(n, r); :};
+
+nline ::= nline NLINE | NLINE;
 
 tcp_stream_rule ::= SET_TYPE TCP_STREAM NLINE
                     SET_SRC port : sp NLINE

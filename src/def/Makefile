@@ -1,4 +1,4 @@
-CPATH = ../../bin
+CPATH = ../../bin:../../lib/jpcap/jpcap.jar
 BLD = ../../bin
 SRC = .
 PKG = $(BLD)/def

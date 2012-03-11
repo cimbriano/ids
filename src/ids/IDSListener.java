@@ -17,13 +17,13 @@ public class IDSListener implements PacketListener {
     }
 
     public void packetArrived(Packet packet) {
-	if (packet instanceof UDPPacket) {
-	    scanner.scan( packetArrived((UDPPacket) packet) );
-	    System.out.println("UDP!");
-	} else if (packet instanceof TCPPacket) {
-	    scanner.scan( packetArrived((TCPPacket) packet) );
-	    System.out.println("TCP!");
-	}
+
+	TCPPacket p = (TCPPacket) packet;
+
+	System.out.print(p.toColoredVerboseString(true));
+	System.out.println(": "+p.getPayloadDataLength());
+	
+
     }
 
     private AbstractStream packetArrived(UDPPacket p) {
