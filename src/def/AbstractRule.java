@@ -5,9 +5,13 @@ import stream.*;
 
 public interface AbstractRule
 {
-	
-   public void printRule();
 
    public void scan(IPPacket packet);
+
+    /*
+     *
+     */
+
+   public void printRule();
 
 }
