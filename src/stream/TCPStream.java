@@ -9,16 +9,16 @@ import net.sourceforge.jpcap.net.TCPPacket;
 
 
 public class TCPStream implements AbstractStream {
-	ArrayList<IPPacket> packetList;
-	StreamKey streamKey;
+	List<IPPacket> packetList;
+	TCPStreamTuple streamKey;
 	
-	public TCPStream(StreamKey key){
+	public TCPStream(TCPStreamTuple key){
 		packetList = new ArrayList<IPPacket>();
 		streamKey = key;		
 	}
 
 	@Override
-	public StreamKey getKey() {
+	public TCPStreamTuple getKey() {
 		return streamKey;
 	}
 
