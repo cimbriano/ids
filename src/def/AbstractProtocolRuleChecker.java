@@ -2,6 +2,7 @@ package def;
 
 import net.sourceforge.jpcap.net.*;
 import java.util.regex.*;
+import java.util.List;
 
 public abstract class AbstractProtocolRuleChecker<T extends IPPacket, S extends AbstractRule> {
 
@@ -15,5 +16,17 @@ public abstract class AbstractProtocolRuleChecker<T extends IPPacket, S extends 
 
 	return m.find();
     }
+
+  protected void alert(String rulename, List<T> matchedPackets){
+    System.out.println("Alert!! Matched rule '" + rulename + "'");
+    
+    for(T packet : matchedPackets){
+        System.out.println(packet.toColoredString(true));
+    }
+    
+    System.out.println("*******************");
+    System.out.print("\n");
+    
+  }
 
 }

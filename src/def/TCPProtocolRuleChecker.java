@@ -47,10 +47,27 @@ public class TCPProtocolRuleChecker extends AbstractProtocolRuleChecker<TCPPacke
 	} while (rowToRemove > -1);
 
 	//Check for full rows which indicate fully matched protocol rule
-	for (TCPPacket[] list : store)
-	    if (isFull(list)) {
-		System.out.println("ZOMG!!!!!");
-		toRemove.add(list);
+	for (TCPPacket[] array : store)
+	    if (isFull(array)) {
+	    
+	    
+	    
+	    
+	    
+	     alert(ruleName, Arrays.asList(array));
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		//System.out.println("ZOMG!!!!!");
+		toRemove.add(array);
 	    }
 
 	//Remove full rows
