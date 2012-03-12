@@ -11,7 +11,7 @@ import net.sourceforge.jpcap.net.TCPPacket;
 public class TCPStream implements Iterable<TCPPacket> {
 	List<TCPPacket> packetList;
 	
-	public TCPStream(TCPStreamTuple key){
+	public TCPStream(){
 		packetList = new ArrayList<TCPPacket>();
 	}
 

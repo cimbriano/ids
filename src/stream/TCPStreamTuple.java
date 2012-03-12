@@ -6,7 +6,7 @@ public class TCPStreamTuple {
 	final String srcIp;
 	final String dstIp;
 
-	public TCPStreamTuple(int srcPort, int dstPort, String srcIp, String dstIp) {
+	public TCPStreamTuple(String srcIp, int srcPort, String dstIp, int dstPort ) {
 		this.srcPort = srcPort;
 		this.dstPort = dstPort;
 		this.srcIp = srcIp;
