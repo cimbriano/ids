@@ -1,7 +1,7 @@
 #!/bin/sh
 
-#export CLASSPATH=../../lib/jpcap/jpcap.jar:.
-#export LD_LIBRARY_PATH=../../lib/jpcap:$LD_LIBRARY_PATH
+export CLASSPATH=../../lib/jpcap/jpcap.jar:../../lib:../../bin:.
+export LD_LIBRARY_PATH=../../lib/jpcap:$LD_LIBRARY_PATH
 
 #java -classpath ${CLASSPATH} ReadingFromPcap $1
 

@@ -5,6 +5,8 @@ import stream.*;
 
 public class TCPRule implements AbstractRule
 {
+    final HashMap<TCPStreamTuple, TCPStream> streams;
+
     final Integer srcPort;
     final Integer dstPort;
     final String  ip;
@@ -17,6 +19,8 @@ public class TCPRule implements AbstractRule
 	 dstPort = dst;
 	 isSend  = s;
 	 regexp  = r;
+
+	 streams = new HashMap<TCPStreamTuple, TCPStream>();
      }
 
      @Override
