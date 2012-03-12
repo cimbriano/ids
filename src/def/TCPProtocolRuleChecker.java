@@ -227,11 +227,16 @@ public class TCPProtocolRuleChecker extends AbstractProtocolRuleChecker<TCPPacke
 	    //System.out.println("Merging... row: "+row1+" and "+row2);
 	   
 	    for(int i = col2; i < rowToRemove.length; i++){
-		if(mergedRow[i] != null){
+		//if(mergedRow[i] != null){
 		    //System.out.println("Row: "+row1+", col: "+i+" is full.");
-		}
+		//}
   	   
-		mergedRow[i] = rowToRemove[i];
+		//Which is best???
+
+		//mergedRow[i] = rowToRemove[i];
+
+		mergedRow[i] = (mergedRow[i] == null ? rowToRemove[i] : mergedRow[i]);
+
 	    }
 	   
 	    return row2;	 
