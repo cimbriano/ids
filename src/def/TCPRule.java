@@ -5,13 +5,13 @@ import stream.*;
 
 public class TCPRule implements AbstractRule
 {
-     final Integer srcPort;
-     final Integer dstPort;
-     final String  ip;
-     final boolean isSend;
-     final String  regexp;
+    final Integer srcPort;
+    final Integer dstPort;
+    final String  ip;
+    final boolean isSend;
+    final String  regexp;
 
-     public TCPRule(Integer src, Integer dst, String ip, boolean s, String r) {
+    public TCPRule(Integer src, Integer dst, String ip, boolean s, String r) {
 	 this.ip = ip;
 	 srcPort = src;
 	 dstPort = dst;
@@ -20,7 +20,7 @@ public class TCPRule implements AbstractRule
      }
 
      @Override
-	 public void scan(IPPacket packet, Rule rule, ThreatDefinition threat) {
+     public void scan(IPPacket packet, Rule rule, ThreatDefinition threat) {
 	 if (packet instanceof TCPPacket) {
 
 	 }
@@ -30,12 +30,12 @@ public class TCPRule implements AbstractRule
       *
       */
 
-     public void printRule() {
-	 System.out.print("type=tcp_stream\n");
-	 System.out.print("src_port="+srcPort+"\n");
-	 System.out.print("dst_port="+dstPort+"\n");
-	 System.out.print("ip="+ip+"\n");
-	 System.out.print((isSend ? "send=" : "recv=")+"\""+regexp+"\"\n");
-     }
+    public void printRule() {
+	System.out.print("type=tcp_stream\n");
+	System.out.print("src_port="+srcPort+"\n");
+	System.out.print("dst_port="+dstPort+"\n");
+	System.out.print("ip="+ip+"\n");
+	System.out.print((isSend ? "send=" : "recv=")+"\""+regexp+"\"\n");
+    }
 
 }
