@@ -131,7 +131,7 @@ tcp_stream_rule ::= SET_TYPE TCP_STREAM NLINE
                     SET_DST port : dp NLINE
                     SET_IP ip : ip NLINE 
                     direction : d REGEXP : r NLINE
-                    {: RESULT = new TCPRule(sp, dp, ip, d.equals("SEND") ? true : false, r); :};
+                    {: RESULT = new TCPStreamRule(sp, dp, ip, d.equals("SEND") ? true : false, r); :};
 
 protocol_rule ::= SET_TYPE PROTOCOL NLINE
                   SET_PROTO proto : p NLINE

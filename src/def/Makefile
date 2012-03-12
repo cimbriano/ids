@@ -14,7 +14,7 @@ CLASSES = $(PKG)/AbstractRule.class \
           $(PKG)/TCPProtocolRule.class \
           $(PKG)/UDPProtocolRule.class \
           $(PKG)/RuleList.class \
-          $(PKG)/TCPRule.class \
+          $(PKG)/TCPStreamRule.class \
           $(PKG)/ThreatDefinition.class
 
 .PHONY: all clean
