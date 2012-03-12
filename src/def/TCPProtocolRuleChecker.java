@@ -48,8 +48,8 @@ public class TCPProtocolRuleChecker extends AbstractProtocolRuleChecker<TCPPacke
     private TCPPacket[] newRow() {
 	TCPPacket[] list = new TCPPacket[ssize];
 	
-	//for (int x = 0; x < ssize; x++)
-	//  list.add(null);
+	for (int x = 0; x < ssize; x++)
+	    list[x] = null;
 
 	return list;
     }
