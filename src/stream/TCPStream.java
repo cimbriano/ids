@@ -3,61 +3,35 @@ package stream;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Collections;
-import net.sourceforge.jpcap.net.IPPacket;
 import net.sourceforge.jpcap.net.TCPPacket;
 
 
-public class TCPStream implements AbstractStream {
-	ArrayList<IPPacket> packetList;
-	StreamKey streamKey;
+public class TCPStream implements Iterable<TCPPacket> {
+	List<TCPPacket> packetList;
 	
-	public TCPStream(StreamKey key){
-		packetList = new ArrayList<IPPacket>();
-		streamKey = key;		
+	public TCPStream(TCPStreamTuple key){
+		packetList = new ArrayList<TCPPacket>();
 	}
 
-	@Override
-	public StreamKey getKey() {
-		return streamKey;
-	}
-
-	@Override
-	public boolean isTCP() {
-		return true;
-	}
-
-	@Override
-	public boolean isUDP() {
-		return false;
-	}
-
-	@Override
-	public Iterator<IPPacket> iterator() {
+	public Iterator<TCPPacket> iterator() {
 	//Inline sort.
-		Collections.sort(packetList, new IPPacketComparator());
+		Collections.sort(packetList, new TCPPacketComparator());
 		return packetList.iterator();
 	}
 	
 
-	@Override
-	public void add(IPPacket packet) {
-		if(packet instanceof TCPPacket) {
+	public void add(TCPPacket packet) {
 			packetList.add((TCPPacket) packet);
-		}
 	}
 
 	
-	private class IPPacketComparator implements Comparator<IPPacket> {
-
-
+	private class TCPPacketComparator implements Comparator<TCPPacket> {
+	
 		@Override
-		public int compare(IPPacket o1, IPPacket o2) {
-			// TODO Auto-generated method stub
-			TCPPacket packet1 = (TCPPacket) o1;
-			TCPPacket packet2 = (TCPPacket) o2;
-			
-			long diff = packet1.getSequenceNumber() - packet2.getSequenceNumber();
+		public int compare(TCPPacket p1, TCPPacket p2) {			
+			long diff = p1.getSequenceNumber() - p2.getSequenceNumber();
 			
 			if(diff > 0) return 1;
 			else if(diff < 0) return -1;
