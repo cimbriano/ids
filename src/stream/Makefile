@@ -6,8 +6,8 @@ PKG = $(BLD)/stream
 JAVAOPTS = -classpath $(CPATH) -d $(BLD) -Xlint:unchecked
 JAVAC = javac
 
-CLASSES = $(PKG)/StreamKey.class $(PKG)/AbstractStream.class \
-          $(PKG)/TCPStream.class $(PKG)/UDPStream.class
+CLASSES = $(PKG)/TCPStreamTuple.class \
+          $(PKG)/TCPStream.class
 
 .PHONY: all clean
 
