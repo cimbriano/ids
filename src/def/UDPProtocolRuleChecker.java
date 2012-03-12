@@ -49,21 +49,7 @@ public class UDPProtocolRuleChecker extends AbstractProtocolRuleChecker<UDPPacke
 	for (List<UDPPacket> list : store)
 	    if (list.size() == ssize) {
 	    
-	    
-	    
-	    
-	    
-	    
-	    
 	     alert(rulename, list);
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		//System.out.println("ZOMG!!! AlErT!!!!");
 		toRemove.add(list);
