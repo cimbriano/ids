@@ -124,13 +124,14 @@ public class TCPStreamRule implements AbstractRule
 
     private void alert(String rulename, List<TCPPacket> matchedPackets) {
 	if (notAlerted(matchedPackets)) {
-	    System.out.println("\nAlert!! Matched rule '" + rulename +"'");
+	    //System.out.println("\nAlert!! Matched rule '" + rulename +"'");
 
-	    for (TCPPacket p : matchedPackets) {
-		System.out.println(p.toColoredString(true));
-	    }
+	    //for (TCPPacket p : matchedPackets) {
+	    //	System.out.println(p.toColoredString(true));
+	    //}
 
-	    System.out.println("*********************\n");
+	    //System.out.println("*********************\n");
+	    RuleAlert.alert(rulename, matchedPackets);
 	}
     }
 

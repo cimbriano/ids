@@ -5,8 +5,6 @@ export JAVAOPTS="-classpath ./lib:./bin:./lib/jpcap/jpcap.jar"
 export JAVA="java"
 export MAIN="ids.IDS"
 
-set -x
-
 if [ "$1" = "all" ]; then   
     ${JAVA} ${JAVAOPTS} ${MAIN} etc/rules/blame_attack1.txt etc/pcap_files/trace1.pcap
     ${JAVA} ${JAVAOPTS} ${MAIN} etc/rules/blame_attack2.txt etc/pcap_files/trace2.pcap

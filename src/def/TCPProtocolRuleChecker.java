@@ -50,7 +50,7 @@ public class TCPProtocolRuleChecker extends AbstractProtocolRuleChecker<TCPPacke
 	for (TCPPacket[] array : store)
 	    if (isFull(array)) {
 	    	    
-		alert(ruleName, Arrays.asList(array));
+		RuleAlert.alert(ruleName, Arrays.asList(array));
 		
 		//System.out.println("ZOMG!!!!!");
 		toRemove.add(array);

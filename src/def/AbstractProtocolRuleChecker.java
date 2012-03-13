@@ -24,16 +24,4 @@ public abstract class AbstractProtocolRuleChecker<T extends IPPacket, S extends 
 	return false;
     }
 
-  protected void alert(String rulename, List<T> matchedPackets){
-    System.out.println("\nAlert!! Matched rule '" + rulename + "'");
-    
-    for(T packet : matchedPackets){
-        System.out.println(packet.toColoredString(true));
-    }
-    
-    System.out.println("*******************");
-    System.out.print("\n");
-    
-  }
-
 }

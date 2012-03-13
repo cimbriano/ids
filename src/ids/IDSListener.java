@@ -8,50 +8,24 @@ import ids.*;
 
 public class IDSListener implements PacketListener
 {
-
-    //final HashMap<StreamKey, AbstractStream> streams =
-    // new HashMap<StreamKey, AbstractStream>();
-    
     final IDSScanner scanner;
+    int count;
 
     public IDSListener(IDSScanner scanner) {
 	this.scanner = scanner;
+	count = 0;
     }
 
     public void packetArrived(Packet packet) {
-	if (packet instanceof IPPacket)
+	if (packet instanceof IPPacket) {
+	    print((IPPacket) packet, count++);
 	    scanner.scan( (IPPacket) packet );
+	}
     }
 
-    /*
-    private AbstractStream packetArrived(UDPPacket p) {
-	StreamKey k = new StreamKey(false, p.getSourcePort(), p.getDestinationPort(),
-				    p.getSourceAddress(), p.getDestinationAddress());
-	AbstractStream stream = getStream(k, false);
-	
-	stream.add(p);
-
-	return stream;
+    private void print(IPPacket packet, int packetNumber) {
+	System.out.print("Packet ("+packetNumber+"): ");
+	System.out.println(packet.toColoredString(true));
     }
-
-    private AbstractStream packetArrived(TCPPacket p) {
-	StreamKey k = new StreamKey(true, p.getSourcePort(), p.getDestinationPort(),
-				    p.getSourceAddress(), p.getDestinationAddress());
-	AbstractStream stream = getStream(k, true);
-	
-	stream.add(p);
-	
-	return stream;
-    }
-
-    private AbstractStream getStream(StreamKey k, boolean isTCP) {
-	if (streams.containsKey(k))
-	    return streams.get(k);
-
-	AbstractStream stream = isTCP ? new TCPStream(k) : new UDPStream(k);
-	streams.put(k, stream);
-
-	return stream;
-	}*/
 
 }
