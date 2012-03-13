@@ -3,7 +3,7 @@ package def;
 import net.sourceforge.jpcap.net.TCPPacket;
 import java.util.regex.*;
 import java.util.*;
-
+import out.*;
 
 public class TCPProtocolRuleChecker extends AbstractProtocolRuleChecker<TCPPacket, TCPProtocolRule> {
 
@@ -50,7 +50,7 @@ public class TCPProtocolRuleChecker extends AbstractProtocolRuleChecker<TCPPacke
 	for (TCPPacket[] array : store)
 	    if (isFull(array)) {
 	    	    
-		RuleAlert.alert(ruleName, Arrays.asList(array));
+		Alert.alert(ruleName, Arrays.asList(array));
 		
 		//System.out.println("ZOMG!!!!!");
 		toRemove.add(array);

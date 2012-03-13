@@ -5,6 +5,7 @@ import net.sourceforge.jpcap.capture.*;
 import net.sourceforge.jpcap.net.*;
 import stream.*;
 import ids.*;
+import out.*;
 
 public class IDSListener implements PacketListener
 {
@@ -18,14 +19,9 @@ public class IDSListener implements PacketListener
 
     public void packetArrived(Packet packet) {
 	if (packet instanceof IPPacket) {
-	    print((IPPacket) packet, count++);
+	    Alert.printPacket((IPPacket) packet);
 	    scanner.scan( (IPPacket) packet );
 	}
-    }
-
-    private void print(IPPacket packet, int packetNumber) {
-	System.out.format("(%08d): ", packet.getId());
-	System.out.println(packet.toColoredString(true));
     }
 
 }
