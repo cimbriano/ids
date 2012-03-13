@@ -15,11 +15,9 @@ if [ "$1" = "all" ]; then
     ${JAVA} ${JAVAOPTS} ${MAIN} etc/rules/xmas_scan.txt etc/pcap_files/trace5.pcap
     ${JAVA} ${JAVAOPTS} ${MAIN} etc/rules/null_scan.txt etc/pcap_files/trace6.pcap
     ${JAVA} ${JAVAOPTS} ${MAIN} etc/rules/tftp_remote_boot.txt etc/pcap_files/trace7.pcap
+elif [ 2 -eq $# ]; then
+    ${JAVA} ${JAVAOPTS} ${MAIN} $1 $2
 else
-    if [ 2 -ne $# ]; then
-	echo "Usage: $0 [rule_file] [pcap_file]"
-    else
-	${JAVA} ${JAVAOPTS} ${MAIN} $1 $2
-    fi
+    echo "Usage: $0 [rule_file] [pcap_file]"
 fi
 
