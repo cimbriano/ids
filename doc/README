@@ -16,7 +16,7 @@ cis555-ids
 ----ids
 ----parse
 ----stream
-----test
+----out
 
 --doc
 --etc
@@ -35,7 +35,7 @@ cis555-ids
 ----parse
 ----stream
 ----test
-
+----out
 
 
 

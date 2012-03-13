@@ -30,7 +30,7 @@ public class IDS
     }
 
     private static void printHeader() {
-	System.out.println("(PCKET ID): IPPacket.toColoredString(true)\t\t\t\t\t[4 head bytes]");
+	System.out.println("(PCKET ID): IPPacket.toColoredString(true)\t\t4 head bytes: [xxxx xxxx xxxx xxxx]");
 
 	for (int i = 0; i < WIDTH; i++)
 	    System.out.print("-");

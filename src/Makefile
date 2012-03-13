@@ -20,7 +20,6 @@ all: $(CLASSES)
 	cd ids; make
 
 clean:
-	rm -fv $(CLASSES)
 	cd out; make clean
 	cd stream; make clean
 	cd def; make clean
