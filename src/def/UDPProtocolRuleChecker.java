@@ -4,6 +4,7 @@ import net.sourceforge.jpcap.net.*;
 import java.util.regex.*;
 import java.util.*;
 import def.*;
+import out.*;
 
 public class UDPProtocolRuleChecker extends AbstractProtocolRuleChecker<UDPPacket, UDPProtocolRule> {
 
@@ -49,7 +50,7 @@ public class UDPProtocolRuleChecker extends AbstractProtocolRuleChecker<UDPPacke
 	for (List<UDPPacket> list : store)
 	    if (list.size() == ssize) {
 	    
-		RuleAlert.alert(rulename, list);
+		Alert.alert(rulename, list);
 		
 		//System.out.println("ZOMG!!! AlErT!!!!");
 		toRemove.add(list);

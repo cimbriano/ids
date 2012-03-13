@@ -30,7 +30,7 @@ public class IDS
     }
 
     private static void printHeader() {
-	System.out.println("(PCKET ID): IPPacket.toColoredString(true)");
+	System.out.println("(PCKET ID): IPPacket.toColoredString(true)\t\t\t\t\t[4 head bytes]");
 
 	for (int i = 0; i < WIDTH; i++)
 	    System.out.print("-");
@@ -53,6 +53,7 @@ public class IDS
 	} catch (CaptureFileOpenException e) {
 	    die("Could not open file: "+e.getMessage());
 	} catch (CapturePacketException e) {
+	    System.out.println("Done scanning trace...");
 	}
     }
 

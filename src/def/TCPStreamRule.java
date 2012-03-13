@@ -6,6 +6,7 @@ import java.util.regex.*;
 import java.io.*;
 import stream.*;
 import java.lang.*;
+import out.*;
 
 public class TCPStreamRule implements AbstractRule
 {
@@ -125,7 +126,7 @@ public class TCPStreamRule implements AbstractRule
 
     private void alert(String rulename, List<TCPPacket> matchedPackets) {
 	if (notAlerted(matchedPackets)) {
-	    RuleAlert.alert(rulename, matchedPackets);
+	    Alert.alert(rulename, matchedPackets);
 	}
     }
 
