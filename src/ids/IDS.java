@@ -10,7 +10,8 @@ import def.*;
 
 public class IDS
 {
-    static final String usage = "Usage: IDS [rule_file] [pcap_file]";
+    private static final String usage = "Usage: IDS [rule_file] [pcap_file]";
+    private static final int WIDTH = 80;
 
     /**
      * @param args
@@ -28,13 +29,26 @@ public class IDS
 	packetCapture(listener, pfile);	
     }
 
+    private static void printHeader() {
+	System.out.println("(PCKET ID): IPPacket.toColoredString(true)");
+
+	for (int i = 0; i < WIDTH; i++)
+	    System.out.print("-");
+
+	System.out.println();
+    }
+
     private static void packetCapture(IDSListener listener, String pfile) {
 	PacketCapture pc = new PacketCapture();
 
-	/* Add filter */
+	/* Add filter? */
 	try {
 	    pc.addPacketListener(listener);
 	    pc.openOffline(pfile);
+
+	    System.out.println();
+	    printHeader();
+
 	    pc.capture(-1);
 	} catch (CaptureFileOpenException e) {
 	    die("Could not open file: "+e.getMessage());

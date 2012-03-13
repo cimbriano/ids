@@ -39,11 +39,12 @@ public class TCPStreamRule implements AbstractRule
 
     private void scan(TCPPacket packet, Rule rule, ThreatDefinition threat) {
 	TCPStream stream = addPacketToStreams(packet);
+	ruleName = rule.name;
 
 	scanStream(stream);
     }
 
-    //Rule rule;
+    private String ruleName;
 
     private void scanStream(TCPStream stream) {
 	List<TCPPacket> toScan = new ArrayList<TCPPacket>();
@@ -119,18 +120,11 @@ public class TCPStreamRule implements AbstractRule
 
 	}
 
-	alert("", alertList);
+	alert(ruleName, alertList);
     }
 
     private void alert(String rulename, List<TCPPacket> matchedPackets) {
 	if (notAlerted(matchedPackets)) {
-	    //System.out.println("\nAlert!! Matched rule '" + rulename +"'");
-
-	    //for (TCPPacket p : matchedPackets) {
-	    //	System.out.println(p.toColoredString(true));
-	    //}
-
-	    //System.out.println("*********************\n");
 	    RuleAlert.alert(rulename, matchedPackets);
 	}
     }

@@ -24,7 +24,7 @@ public class IDSListener implements PacketListener
     }
 
     private void print(IPPacket packet, int packetNumber) {
-	System.out.print("Packet ("+packetNumber+"): ");
+	System.out.format("(%08d): ", packet.getId());
 	System.out.println(packet.toColoredString(true));
     }
 

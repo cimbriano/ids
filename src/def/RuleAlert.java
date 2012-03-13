@@ -14,6 +14,7 @@ final class RuleAlert
 	System.out.println(header);
     
 	for(IPPacket packet : matchedPackets){
+	    System.out.format("(%08d): ", packet.getId());
 	    System.out.println(packet.toColoredString(true));
 	}
     
