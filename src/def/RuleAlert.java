@@ -14,12 +14,42 @@ final class RuleAlert
 	System.out.println(header);
     
 	for(IPPacket packet : matchedPackets){
-	    System.out.format("(%08d): ", packet.getId());
-	    System.out.println(packet.toColoredString(true));
+	    //System.out.format("(%08d): ", packet.getId());
+	    //System.out.println(packet.toColoredString(true));
+
+	    printPacket(packet);
 	}
     
 	System.out.println(footer);
   	
+    }
+
+    public static void printPacket(IPPacket packet) {
+
+	try {
+	    String data = new String(packet.getData(), "ISO-8859-1");
+
+	    System.out.format("(%08d): ", packet.getId());
+	    System.out.print(packet.toColoredString(true));
+
+	    for (int i = 0; i < data.length() && i < 12; i++) {
+		char c = data.charAt(i);
+
+		if (c > 32 && c < 127)
+		    System.out.print(c);
+		else
+		    System.out.print("_");
+
+	    }
+
+	    System.out.println();
+	} catch (Exception e) {
+
+	    e.printStackTrace();
+
+	}
+	    
+
     }
 
     private static String buildHeader(String ruleName){
