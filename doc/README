@@ -41,7 +41,10 @@ cis555-ids
 
 Usage:
 
-  Run the shell script run.sh from the project root directory
+  Run the shell script run.sh from the project root directory.
+  
+  "./run.sh demo" will run a demonstration of each one of the sample rule files against one of the trace files.
+  Each demonstration is piped into <less> so when the demonstration is complete, you can hit 'q'
 
 
 Description of files included:
