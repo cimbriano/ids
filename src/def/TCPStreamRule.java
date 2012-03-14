@@ -9,7 +9,12 @@ import java.lang.*;
 import out.*;
 
 /**
- * TCPStreamRule.java: 
+ * TCPStreamRule.java: Object instantiated when the parser parses a tcp stream rule contains all the meta data as defined by the grammar.
+ * 
+ * This class, unlike the ProtocolRule classes, has the mechanics for performing Packet scanning itself. It makes use of a map of
+ * TCPStreamTuples to TCPStream to keep track of various stream that might be included in the trace. 
+ * 
+ * It also keeps a list of already alerted packet sequences such that only new alerts, for a given rule, are ever alerted.
  */
 public class TCPStreamRule implements AbstractRule {
     final HashMap<TCPStreamTuple, TCPStream> streams;
