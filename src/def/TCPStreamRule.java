@@ -8,8 +8,10 @@ import stream.*;
 import java.lang.*;
 import out.*;
 
-public class TCPStreamRule implements AbstractRule
-{
+/*
+ * TCPStreamRule.java: 
+ */
+public class TCPStreamRule implements AbstractRule {
     final HashMap<TCPStreamTuple, TCPStream> streams;
     final HashMap<List<TCPPacket>, Boolean> alertedPackets;
 
@@ -104,6 +106,9 @@ public class TCPStreamRule implements AbstractRule
 	int packetEnd;
 
 	for (TCPPacket p : partialStream) {
+
+	    //Don't include empty packets in the alert
+	    if (p.getPayloadDataLength() == 0) continue;
 	 
 	    packetEnd = packetStart + p.getPayloadDataLength();
 

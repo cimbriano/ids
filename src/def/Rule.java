@@ -3,8 +3,12 @@ package def;
 import net.sourceforge.jpcap.net.*;
 import stream.*;
 
-public class Rule
-{
+/*
+ * Rule.java: Corresponds to rule non-terminal of grammar. Used in
+ * parsing to construct the threat definition. Also, forwards packet
+ * scans to its abstract rules (one of tcp protocol, udp protocol or tcp stream).
+ */
+public class Rule {
     final String name;
     final AbstractRule contents;
 

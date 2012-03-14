@@ -4,8 +4,12 @@ import net.sourceforge.jpcap.net.*;
 import stream.*;
 import def.*;
 
-public class IDSScanner
-{
+/*
+ * IDSScanner.java: Takes a packet to scan and runs through
+ * all of the threatdefinitions rules (all the rules defined in
+ * the rule file) as there may be many.
+ */
+public class IDSScanner {
     final ThreatDefinition threat;
 	
     public IDSScanner(ThreatDefinition threat){

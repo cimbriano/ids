@@ -8,20 +8,21 @@ import java.io.*;
 import parse.*;
 import def.*;
 
-public class IDS
-{
+/*
+ * IDS.java: Main class for the IDS. Process the command line arguments (make sure
+ * there are two of them), parse the rule file, build the PacketCapture object and
+ * begin capturing packets.
+ */
+public class IDS {
     private static final String usage = "Usage: IDS [rule_file] [pcap_file]";
-    private static final int WIDTH = 80;
+    private static final int WIDTH = 80; //terminal width
 
-    /**
-     * @param args
-     */
     public static void main(String[] argv) {
     	if (argv.length < 2)
 	    die(usage);
 
-	String rules = argv[0];
-	String pfile = argv[1];
+	String rules = argv[0]; //rule file
+	String pfile = argv[1]; //pcap file
 
     	ThreatDefinition def = loadDefinition(rules);
 	IDSListener listener = new IDSListener(new IDSScanner(def));
@@ -30,7 +31,7 @@ public class IDS
     }
 
     private static void printHeader() {
-	System.out.println("(PCKET ID): IPPacket.toColoredString(true)\t\t\t\t\t[4 head bytes]");
+	System.out.println("(PCKET ID): IPPacket.toColoredString(true)\t\t4 head bytes: [xxxx xxxx xxxx xxxx]");
 
 	for (int i = 0; i < WIDTH; i++)
 	    System.out.print("-");
@@ -41,7 +42,6 @@ public class IDS
     private static void packetCapture(IDSListener listener, String pfile) {
 	PacketCapture pc = new PacketCapture();
 
-	/* Add filter? */
 	try {
 	    pc.addPacketListener(listener);
 	    pc.openOffline(pfile);

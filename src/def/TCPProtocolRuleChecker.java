@@ -5,8 +5,17 @@ import java.util.regex.*;
 import java.util.*;
 import out.*;
 
+/*
+ * TCPProtocolRuleChecker.java: Does all the heavy lifting for checking 
+ * tcp protocol rules. Provides an interface to add packets to the checker.
+ * The checker keeps a 2-d array of matched-subrules-to-streams. There is one
+ * column per subrule and at least one row per tcp stream. Packets are placed into
+ * the array where they fit (the subrule and stream that they match). When a row
+ * is filled all the subrules have been matched and a alert can be trigger. This way,
+ * if any (or all) of the packets come out of order, the subrules will still be matched,
+ * the row eventually filled and an alert triggered.
+ */
 public class TCPProtocolRuleChecker extends AbstractProtocolRuleChecker<TCPPacket, TCPProtocolRule> {
-
     final List<TCPPacket[]> store;
     final int ssize;
 
@@ -28,35 +37,25 @@ public class TCPProtocolRuleChecker extends AbstractProtocolRuleChecker<TCPPacke
 	    store.add(row);
 	}
 	
-	//System.out.println("*********************************");
-	//printStore();
-	//System.out.println("*********************************");
-
 	int rowToRemove;
-
+	//Consolidate rows and try to make full rows
 	do {
 	   rowToRemove = consolidatePotentialMatchList(rule.subrules);
 
 	    if (rowToRemove > -1)
 		store.remove(rowToRemove);
-
-	    //System.out.println("----------------------------------");
-	    //printStore();
-	    //System.out.println("----------------------------------");
 	    
 	} while (rowToRemove > -1);
 
-	//Check for full rows which indicate fully matched protocol rule
+	//Check for full rows which indicate fully matched protocol rules
+	//Alert if any are found, then remove them
 	for (TCPPacket[] array : store)
 	    if (isFull(array)) {
-	    	    
 		Alert.alert(ruleName, Arrays.asList(array));
-		
-		//System.out.println("ZOMG!!!!!");
 		toRemove.add(array);
 	    }
 
-	//Remove full rows
+	//Remove full rows (already matched and alerted rules)
 	for (TCPPacket[] list : toRemove)
 	    store.remove(list);
 		
@@ -79,6 +78,7 @@ public class TCPProtocolRuleChecker extends AbstractProtocolRuleChecker<TCPPacke
 	return list;
     }
 
+    //Return a list of the indices of the subrules that this packet matches
     private List<Integer> matchingSubRuleIndices(TCPPacket candidate, TCPProtocolRule rule, String host) {
 	List<Integer> indices = new ArrayList<Integer>();
 
@@ -89,6 +89,7 @@ public class TCPProtocolRuleChecker extends AbstractProtocolRuleChecker<TCPPacke
 	return indices;
     }
 
+    //Check if the given packet matches the given subrule
     private boolean matchSubRule(TCPPacket candidate, ProtocolSubrule subRule, TCPProtocolRule rule, String host) {
 	if (checkDirection(candidate, subRule, rule, host))
 	    if (checkContents(candidate, subRule))
@@ -98,6 +99,7 @@ public class TCPProtocolRuleChecker extends AbstractProtocolRuleChecker<TCPPacke
 	return false;
     }
 
+    //Check if the given packet matches the given subrule's flag clause
     private boolean checkFlags(TCPPacket candidate, ProtocolSubrule subRule) {
 	List<Character> flags = subRule.flags;
 
@@ -113,6 +115,7 @@ public class TCPProtocolRuleChecker extends AbstractProtocolRuleChecker<TCPPacke
 	return true;
     }
 
+    //Check if the given packet is going in the correct dirrection for the subrule
     private boolean checkDirection(TCPPacket candidate, ProtocolSubrule subRule, TCPProtocolRule rule, String host) {
 	if ((subRule.isSend && checkSend(candidate, rule, host)) || (!subRule.isSend && checkRecv(candidate, rule, host)))
 	    return true;
@@ -120,6 +123,7 @@ public class TCPProtocolRuleChecker extends AbstractProtocolRuleChecker<TCPPacke
 	return false;
     }
 
+    //Check if the send direction works
     private boolean checkSend(TCPPacket candidate, TCPProtocolRule rule, String host) {
 	if (candidate.getSourceAddress().equals(host) &&
 	    (candidate.getSourcePort() == rule.srcPort || rule.srcPort == 0) &&
@@ -130,6 +134,7 @@ public class TCPProtocolRuleChecker extends AbstractProtocolRuleChecker<TCPPacke
 	return false;
     }
 
+    //Check if the recv direction works
     private boolean checkRecv(TCPPacket candidate, TCPProtocolRule rule, String host) {
 	if ((candidate.getSourceAddress().equals(rule.ip) || rule.ip.equals("*.*.*.*")) &&
 	    (candidate.getSourcePort() == rule.dstPort || rule.dstPort == 0) &&
@@ -139,51 +144,48 @@ public class TCPProtocolRuleChecker extends AbstractProtocolRuleChecker<TCPPacke
 
 	return false;
     }
-		
+
+    /*
+     * consolidate rows in the 2-d array to try and fill rows. This
+     * way, packets that match all subrules, but arrive out-of-order,
+     * will be consolidated and an alert will be raised--as desired.
+     */
     private int consolidatePotentialMatchList(ProtocolSubruleList rules){
-	for(int i = 0; i < ssize - 1; i++){
+	for (int i = 0; i < ssize - 1; i++) {
 	    int col1 = i;
 	    int col2 = i + 1;
 		  
 	    //Foreach packet in the first column
-	    for(TCPPacket[] candidateRow : store){
-		    
+	    for (TCPPacket[] candidateRow : store) {
 		TCPPacket packet1 = candidateRow[col1];
-		if(packet1 != null) {
-		    
-		    //compare that packet to every packet in the second column
 
-		    for(TCPPacket[] targetRow : store ){
+		if (packet1 != null) {
+		    //compare that packet to every packet in the second column
+		    for(TCPPacket[] targetRow : store ) {
 			    
-			if (store.indexOf(targetRow) == store.indexOf(candidateRow)) continue;
+			if (store.indexOf(targetRow) == store.indexOf(candidateRow)) continue; //already neighbors
 			    
 			TCPPacket packet2 = targetRow[col2];
 		        
 			if (packet2 != null) {
-
-			    if (areValidNeighbors(packet1, packet2, rules.get(col1), rules.get(col2))){
-
-				//Try to merge rows
-
+			    if (areValidNeighbors(packet1, packet2, rules.get(col1), rules.get(col2))) {
 				return mergeRows(store.indexOf(candidateRow), store.indexOf(targetRow), col1, col2);  
-				    
-				//consolidatePotentialMatchList(rules);
-
 			    }
-		       
 			}
 		        		          
 		    } // targetRow loop
-
 		} //packet1 is null   		  
-
 	    } // CandidateRow loops		  
 		  
 	}//column pair loop
 
 	return -1;			
     }
-	
+
+    /*
+     * Test if two packets are valid neighbors according to the subrules; i.e., when put back in order
+     * they match the subrules and constitute an attack.
+     */
     private boolean areValidNeighbors(TCPPacket p1, TCPPacket p2, ProtocolSubrule r1, ProtocolSubrule r2){
 	    
 	//Check the direction of the rules. 
@@ -218,31 +220,22 @@ public class TCPProtocolRuleChecker extends AbstractProtocolRuleChecker<TCPPacke
 	return false; 
     }
 	
+    //Merge two rows in the 2-d array
     public int mergeRows(int row1, int row2, int col1, int col2){	
 	TCPPacket[] rowToRemove = store.get(row2);
 	TCPPacket[] mergedRow = store.get(row1);
-
-	//System.out.println("Merging... row: "+row1+" and "+row2);
-	   
+  
 	for(int i = col2; i < rowToRemove.length; i++){
-	    //if(mergedRow[i] != null){
-	    //System.out.println("Row: "+row1+", col: "+i+" is full.");
-	    //}
-  	   
-	    //Which is best???
-
-	    //mergedRow[i] = rowToRemove[i];
-
 	    mergedRow[i] = (mergedRow[i] == null ? rowToRemove[i] : mergedRow[i]);
 
 	}
 	   
 	return row2;	 
     }
-
-	/*
-	 *
-	 */
+    
+    /*
+     *
+     */
 
     private void printStore() {
 	for (TCPPacket[] row : store) {
