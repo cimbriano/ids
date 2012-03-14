@@ -104,6 +104,9 @@ public class TCPStreamRule implements AbstractRule
 	int packetEnd;
 
 	for (TCPPacket p : partialStream) {
+
+	    //Don't include empty packets in the alert
+	    if (p.getPayloadDataLength() == 0) continue;
 	 
 	    packetEnd = packetStart + p.getPayloadDataLength();
 
