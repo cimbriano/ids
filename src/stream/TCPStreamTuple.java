@@ -1,6 +1,6 @@
 package stream;
 
-/*
+/**
  * TCPStreamTuple.java: A 4-tuple of (srcIp, srcPort, dstIp, dstPort). Used
  * to uniquely identifiy TCP sessions when there may be multiple sessions
  * in question for intrusion detection. Implements hashCode() so that TCPStream

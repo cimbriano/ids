@@ -78,7 +78,13 @@ public class TCPProtocolRuleChecker extends AbstractProtocolRuleChecker<TCPPacke
 	return list;
     }
 
-    //Return a list of the indices of the subrules that this packet matches
+    /**
+     * Return a list of the indices of the subrules that this packet matches
+     * @param candidate
+     * @param rule
+     * @param host
+     * @return
+     */
     private List<Integer> matchingSubRuleIndices(TCPPacket candidate, TCPProtocolRule rule, String host) {
 	List<Integer> indices = new ArrayList<Integer>();
 
@@ -89,7 +95,14 @@ public class TCPProtocolRuleChecker extends AbstractProtocolRuleChecker<TCPPacke
 	return indices;
     }
 
-    //Check if the given packet matches the given subrule
+    /**
+     * Check if the given packet matches the given subrule
+     * @param candidate
+     * @param subRule
+     * @param rule
+     * @param host
+     * @return
+     */
     private boolean matchSubRule(TCPPacket candidate, ProtocolSubrule subRule, TCPProtocolRule rule, String host) {
 	if (checkDirection(candidate, subRule, rule, host))
 	    if (checkContents(candidate, subRule))
@@ -99,7 +112,12 @@ public class TCPProtocolRuleChecker extends AbstractProtocolRuleChecker<TCPPacke
 	return false;
     }
 
-    //Check if the given packet matches the given subrule's flag clause
+    /**
+     * Check if the given packet matches the given subrule's flag clause
+     * @param candidate 
+     * @param subRule
+     * @return true if the specified flags in <subRule> are asserted in packet AND no other flags are asserted. flase otherwise.
+     */
     private boolean checkFlags(TCPPacket candidate, ProtocolSubrule subRule) {
 	List<Character> flags = subRule.flags;
 
@@ -115,7 +133,14 @@ public class TCPProtocolRuleChecker extends AbstractProtocolRuleChecker<TCPPacke
 	return true;
     }
 
-    //Check if the given packet is going in the correct dirrection for the subrule
+    /**
+     * Check if the given packet is going in the correct dirrection for the subrule
+     * @param candidate Packet to check direction
+     * @param subRule Subrule indicating required direction for packet
+     * @param rule 
+     * @param host Host for which <rule> applies
+     * @return
+     */
     private boolean checkDirection(TCPPacket candidate, ProtocolSubrule subRule, TCPProtocolRule rule, String host) {
 	if ((subRule.isSend && checkSend(candidate, rule, host)) || (!subRule.isSend && checkRecv(candidate, rule, host)))
 	    return true;
@@ -145,10 +170,13 @@ public class TCPProtocolRuleChecker extends AbstractProtocolRuleChecker<TCPPacke
 	return false;
     }
 
-    /*
-     * consolidate rows in the 2-d array to try and fill rows. This
+    /**
+     * Consolidate rows in the 2-d array to try and fill rows. This
      * way, packets that match all subrules, but arrive out-of-order,
      * will be consolidated and an alert will be raised--as desired.
+     * 
+     * @param rules
+     * @return
      */
     private int consolidatePotentialMatchList(ProtocolSubruleList rules){
 	for (int i = 0; i < ssize - 1; i++) {
@@ -182,9 +210,16 @@ public class TCPProtocolRuleChecker extends AbstractProtocolRuleChecker<TCPPacke
 	return -1;			
     }
 
-    /*
+    
+    /** 
      * Test if two packets are valid neighbors according to the subrules; i.e., when put back in order
      * they match the subrules and constitute an attack.
+     * 
+     * @param p1
+     * @param p2
+     * @param r1
+     * @param r2
+     * @return true if p1 and p2 are packets from the same stream and either one immediately follows or precedes the other
      */
     private boolean areValidNeighbors(TCPPacket p1, TCPPacket p2, ProtocolSubrule r1, ProtocolSubrule r2){
 	    
@@ -220,7 +255,14 @@ public class TCPProtocolRuleChecker extends AbstractProtocolRuleChecker<TCPPacke
 	return false; 
     }
 	
-    //Merge two rows in the 2-d array
+    /**
+     * Merge two rows in the 2-d array
+     * @param row1 Row in store to merge
+     * @param row2 Row in store to merge
+     * @param col1 Position in row 1. Contents in row 1 up to this position will be included in the merge
+     * @param col2 Position in row 2. Contents in row 2 AFTER this position will be included in the merge
+     * @return
+     */
     public int mergeRows(int row1, int row2, int col1, int col2){	
 	TCPPacket[] rowToRemove = store.get(row2);
 	TCPPacket[] mergedRow = store.get(row1);
@@ -233,9 +275,6 @@ public class TCPProtocolRuleChecker extends AbstractProtocolRuleChecker<TCPPacke
 	return row2;	 
     }
     
-    /*
-     *
-     */
 
     private void printStore() {
 	for (TCPPacket[] row : store) {

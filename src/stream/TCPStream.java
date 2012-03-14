@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Collections;
 import net.sourceforge.jpcap.net.TCPPacket;
 
-/*
+/**
  * TCPStream.java: builds a list of recevied packets for a particular stream.
  * Packets are returned in sorted order (sorted by sequence number) when
  * object is iterated over. Stream reconstruction (interpreting sequence/ack numbers)
