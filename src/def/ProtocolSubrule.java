@@ -2,8 +2,12 @@ package def;
 
 import java.util.*;
 
-public class ProtocolSubrule
-{
+/*
+ * ProtocolSubrule.java: Object to hold the contents of a protocol subrule.
+ * Used to construct the threat definition during parsing and used to scan
+ * packets during packet capturing.
+ */
+public class ProtocolSubrule {
     final List<Character> flags;
     final boolean isSend;
     final String regexp;

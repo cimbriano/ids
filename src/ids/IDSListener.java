@@ -7,10 +7,13 @@ import stream.*;
 import ids.*;
 import out.*;
 
-public class IDSListener implements PacketListener
-{
+/*
+ * IDSListener.java: Listens for packets and passes them to IDSScanner
+ * for scanning. Also, prints the packet to stdout.
+ */
+public class IDSListener implements PacketListener {
     final IDSScanner scanner;
-    int count;
+    private int count;
 
     public IDSListener(IDSScanner scanner) {
 	this.scanner = scanner;
@@ -18,8 +21,8 @@ public class IDSListener implements PacketListener
     }
 
     public void packetArrived(Packet packet) {
-	if (packet instanceof IPPacket) {
-	    Alert.printPacket((IPPacket) packet);
+	if (packet instanceof IPPacket) { //ignore non-ip packets
+	    Alert.printPacket( (IPPacket) packet );
 	    scanner.scan( (IPPacket) packet );
 	}
     }

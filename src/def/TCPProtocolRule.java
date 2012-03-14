@@ -5,8 +5,12 @@ import java.util.*;
 import stream.*;
 import def.*;
 
-public class TCPProtocolRule implements AbstractRule
-{
+/*
+ * TCPProtocolRule.java: Corresponds to a tcp protocol rule in the grammar.
+ * Contains all the information for checking tcp protocol rules and the 
+ * TCPProtocolRuleChecker to do so. Passes packets to the checker for checking.
+ */
+public class TCPProtocolRule implements AbstractRule {
     final TCPProtocolRuleChecker checker;
 
     final ProtocolSubruleList subrules;

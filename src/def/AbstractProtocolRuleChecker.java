@@ -5,6 +5,10 @@ import java.util.regex.*;
 import java.util.List;
 import java.io.*;
 
+/* AbstractProtocolRuleChecker.java: Base class for all protocol checkers (tcp and udp).
+ * Implements function for scanning a packet data and enforces an interface for
+ * adding packets to the checker.
+ */
 public abstract class AbstractProtocolRuleChecker<T extends IPPacket, S extends AbstractRule> {
 
     public abstract void add(T packet, S rule, String rulename, String host);

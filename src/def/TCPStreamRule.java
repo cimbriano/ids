@@ -8,8 +8,10 @@ import stream.*;
 import java.lang.*;
 import out.*;
 
-public class TCPStreamRule implements AbstractRule
-{
+/*
+ * TCPStreamRule.java: 
+ */
+public class TCPStreamRule implements AbstractRule {
     final HashMap<TCPStreamTuple, TCPStream> streams;
     final HashMap<List<TCPPacket>, Boolean> alertedPackets;
 

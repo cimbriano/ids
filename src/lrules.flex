@@ -3,6 +3,10 @@ package parse;
 import java_cup.runtime.*;
 import parse.*;
 
+/* lrules.flex: Token definitions for rules. JFlex then generates
+ * lexer.java for us to use in our parser.
+ */
+
 %%
 
 %class lexer

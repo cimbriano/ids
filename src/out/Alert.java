@@ -4,9 +4,13 @@ import net.sourceforge.jpcap.net.*;
 import java.util.*;
 import java.io.*;
 
-public final class Alert 
-{
-    private static final int WIDTH = 80;
+/* Alert.java: A final class with static methods to handle output. Provides two
+ * functions: alert() and printPacket(). alert() will print an alert and packet
+ * sequence to stdout. printPacket() will print a packet's ID, signature and first
+ * 4 bytes of data to stdout.
+ */
+public final class Alert {
+    private static final int WIDTH = 80; //terminal width
 
     public static void alert(String ruleName, List<? extends IPPacket> matchedPackets) {
 	String h1 = buildHeader("Alert! Matched rule: " + ruleName);

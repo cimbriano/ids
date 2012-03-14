@@ -3,6 +3,10 @@ package parse;
 import java_cup.runtime.*;
 import def.*;
 
+/* yrules.cup: Grammer definition for the rule files. java_cup then
+ * generates parser.java and sym.java for us to use as a parser.
+ */
+
 /* Code to embed in parser */
 
 parser code {:
