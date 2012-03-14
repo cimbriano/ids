@@ -124,6 +124,12 @@ public class UDPProtocolRuleChecker extends AbstractProtocolRuleChecker<UDPPacke
 	return false;
     }
 
+    /**
+     * 
+     * @param p1
+     * @param p2
+     * @return
+     */
     private boolean matchStream(UDPPacket p1, UDPPacket p2) {
 	if (p1.getSourceAddress().equals(p2.getSourceAddress()) && p1.getDestinationAddress().equals(p2.getDestinationAddress()))
 	    if (p1.getSourcePort() == p2.getSourcePort() && p1.getDestinationPort() == p2.getDestinationPort())

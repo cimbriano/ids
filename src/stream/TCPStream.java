@@ -21,6 +21,10 @@ public class TCPStream implements Iterable<TCPPacket> {
 	packetList = new ArrayList<TCPPacket>();
     }
 
+    /**
+     * Returns an iterator for the packets put into this TCPStream. 
+     * The iterator respects the defined order of the TCP packet protocol
+     */
     public Iterator<TCPPacket> iterator() {
 	//Inline sort.
 	Collections.sort(packetList, new TCPPacketComparator());
@@ -31,6 +35,9 @@ public class TCPStream implements Iterable<TCPPacket> {
 	packetList.add(packet);
     }
 	
+    /**
+     * Private internal class to define a Comparator for TCPPackets
+     */
     private class TCPPacketComparator implements Comparator<TCPPacket> {
 	
 	@Override

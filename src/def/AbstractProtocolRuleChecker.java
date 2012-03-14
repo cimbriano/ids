@@ -2,7 +2,6 @@ package def;
 
 import net.sourceforge.jpcap.net.*;
 import java.util.regex.*;
-import java.util.List;
 import java.io.*;
 
 /** AbstractProtocolRuleChecker.java: Base class for all protocol checkers (tcp and udp).
@@ -13,6 +12,12 @@ public abstract class AbstractProtocolRuleChecker<T extends IPPacket, S extends 
 
     public abstract void add(T packet, S rule, String rulename, String host);
 
+    /**
+     * Checks the contents specfied in the subRule against the contents of the packet body.
+     * @param packet
+     * @param subRule
+     * @return true if the regex specified in <subRule> is found anywhere within the packets contents
+     */
     protected boolean checkContents(IPPacket packet, ProtocolSubrule subRule) {
 	try {
 	    String data = new String(packet.getData(), "ISO-8859-1");

@@ -16,6 +16,9 @@ public class ThreatDefinition implements Iterable<Rule> {
 	rules = l;
     }
 
+    /**
+     * Returns an iterator of the attack rules specified in the this ThreatDefinition
+     */
     public Iterator<Rule> iterator() {
 	return rules.iterator();
     }
