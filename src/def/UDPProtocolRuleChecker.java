@@ -1,11 +1,25 @@
 package def;
 
 import net.sourceforge.jpcap.net.*;
-import java.util.regex.*;
 import java.util.*;
-import def.*;
 import out.*;
 
+/**
+ * UDPProtocolRuleChecker.java: Does all the heavy lifting for checking 
+ * udp protocol rules. It provides an interface to add packets to the checker.
+ * The checker keeps an array of arrays representing a partially matched protocol subrule sequence. 
+ * 
+ * Suppose the index i represents a particular subrule sequence that is partially matched by some number of packets
+ * already scanned. Then the index j is the particular subrule in the sequence.
+ * 
+ * When a packet arrives, it is scanned against the 'next' sub-rule in all i partial sequences,
+ * if it matches the next subrule to be matched, the packet is added to that partial sequence. If it doesn't match, the entire
+ * subsequence is discarded since the udp sub rule must be matched in order.
+ * 
+ * If a row is filled, the entire udp subrule sequence has been matched by some set of packets, this will trigger an alert to
+ * standard out showing some details about the packets causing the alert, 
+ * the name of the matched rule and a few bytes from the packet contents 
+ */
 public class UDPProtocolRuleChecker extends AbstractProtocolRuleChecker<UDPPacket, UDPProtocolRule> {
 
     final List<List<UDPPacket>> store;

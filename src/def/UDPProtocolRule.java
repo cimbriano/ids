@@ -5,7 +5,7 @@ import java.util.*;
 import stream.*;
 import def.*;
 
-/*
+/**
  * UDPProtocolRule.java: Corresponds to a udp protocol rule in the grammar.
  * Contains all the information for checking udp protocol rules and the 
  * UDPProtocolRuleChecker to do so. Passes packets to the checker for checking.

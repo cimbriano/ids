@@ -5,7 +5,7 @@ import java.util.regex.*;
 import java.util.*;
 import out.*;
 
-/*
+/**
  * TCPProtocolRuleChecker.java: Does all the heavy lifting for checking 
  * tcp protocol rules. Provides an interface to add packets to the checker.
  * The checker keeps a 2-d array of matched-subrules-to-streams. There is one

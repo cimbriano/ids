@@ -2,7 +2,7 @@ package def;
 
 import java.util.*;
 
-/*
+/**
  * ProtocolSubrule.java: Object to hold the contents of a protocol subrule.
  * Used to construct the threat definition during parsing and used to scan
  * packets during packet capturing.

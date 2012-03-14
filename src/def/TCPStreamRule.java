@@ -8,7 +8,7 @@ import stream.*;
 import java.lang.*;
 import out.*;
 
-/*
+/**
  * TCPStreamRule.java: 
  */
 public class TCPStreamRule implements AbstractRule {
