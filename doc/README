@@ -34,6 +34,11 @@ cis555-ids
 ----test
 ----out
 
+Project Setup:
+
+	* The jpcap library must be in the /lib/jpcap/ directory and should be named jpcap.jar
+	* The JFlex libaary must be in the /lib/jflex/bin/jflex-1.4.3/ directory. The lib/ directory has a symlink to this directory referenced in the Makefile
+	* The java_cup library must be in the /lib/java_cup directory.  These files were just the untar of the java_cup library downloaded from the provided link.
 
 
 Usage:
