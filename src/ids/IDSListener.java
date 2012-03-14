@@ -1,10 +1,8 @@
 package ids;
 
-import java.util.*;
 import net.sourceforge.jpcap.capture.*;
 import net.sourceforge.jpcap.net.*;
-import stream.*;
-import ids.*;
+//import stream.*;
 import out.*;
 
 /*

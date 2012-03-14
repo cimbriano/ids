@@ -8,7 +8,7 @@ import java.io.*;
 import parse.*;
 import def.*;
 
-/*
+/**
  * IDS.java: Main class for the IDS. Process the command line arguments (make sure
  * there are two of them), parse the rule file, build the PacketCapture object and
  * begin capturing packets.

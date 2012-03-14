@@ -16,6 +16,13 @@ public class ProtocolSubrule {
 	regexp = r;
 	isSend = s;
 
+	
+	/*flags is null if no flag conditions were specfied
+	 * if flag conditions were specfied, but the specification was that all 
+	 * flags were off, then flags is an empty, but initialized List
+	 * 
+	 */
+	
 	if (f == null) {
 	    flags = null;
 	} else {
