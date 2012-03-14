@@ -9,6 +9,10 @@ import java.util.*;
  */
 public class RuleList extends ArrayList<Rule> {
 
+    public RuleList() {
+	super();
+    }
+
     public RuleList(Rule r) {
 	super();
 	add(r);

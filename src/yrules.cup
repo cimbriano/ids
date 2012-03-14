@@ -102,7 +102,10 @@ non terminal nline;
 /* Grammar */
 
 file ::= host : ip rule_list : l
-         {: RESULT = new ThreatDefinition(ip, l); :};
+         {: RESULT = new ThreatDefinition(ip, l); :}
+         |
+	 host : ip
+         {: RESULT = new ThreatDefinition(ip, new RuleList()); :};
 
 rule_list ::= rule : r
               {: RESULT = new RuleList(r); :}            

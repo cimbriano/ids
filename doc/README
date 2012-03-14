@@ -45,6 +45,15 @@ Usage:
   "./run.sh <rulefile> <tracefile>" will run the IDS with the specified rule and trace file, the output
   is piped to <less>.
 
+  When run, IDS will print the packet ID, packet signature and first four bytes of packet data for each packet as it is
+  received. The IDS will rebuild tcp streams and scan dynamically as packets arrive. As soon as rules are fully
+  applicable (i.e., all subrules match for a protocol rule or enough of the tcp stream can be reconstructed to match
+  the rule of a tcp stream rule) the sequence of offending packets is printed. Packet capturing continues afterwards. If a
+  single packet can constitute many attacks, it is included in the matching of all those attacks: If regular expression
+  "\x0909.*\x80" is matched in packets A, B and C then A, B and C are printed as offending packets; however, if packet D
+  arrives with "\x80" packets A, B, C and D are flagged as offending packets--because of the ".*" the regular expression
+  (attack) can be match in both sequences of packets. The IDS terminates when the pcap trace is complete.
+
 
 Description of files included:
 
